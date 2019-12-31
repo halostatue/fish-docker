@@ -1,0 +1,48 @@
+---
+Style/BarePercentLiterals:
+  EnforcedStyle: percent_q
+
+Style/BlockDelimiters:
+  EnforcedStyle: semantic
+
+Style/ClassCheck:
+  EnforcedStyle: kind_of?
+
+Style/CommandLiteral:
+  EnforcedStyle: percent_x
+
+Style/FormatString:
+  EnforcedStyle: percent
+
+Style/FormatStringToken:
+  EnforcedStyle: template
+
+Metrics/LineLength:
+  Max: 120
+
+Style/RescueStandardError:
+  EnforcedStyle: implicit
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Style/SpecialGlobalVars:
+  Enabled: false
+
+Style/StderrPuts:
+  Enabled: false
