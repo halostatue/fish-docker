@@ -2,7 +2,7 @@
 
 Completions for [Docker] in the [fish shell], based on [docker-fish-completion].
 
-[![https://img.shields.io/github/tag/halostatue/fish-docker.svg?label=Version]]][releases]
+[![Version badge]][latest]
 
 ## Installation
 
@@ -54,4 +54,5 @@ It has been tested with Ruby 2.6.
 [fisher]: https://github.com/jorgebucaran/fisher
 [fish]: https://github.com/fish-shell/fish-shell
 [docker-fish-completion]: https://github.com/barnybug-archive/docker-fish-completion
-[releases]: https://github.com/halostatue/fish-docker/releases/latest
+[version badge]: https://img.shields.io/github/tag/halostatue/fish-docker.svg?label=Version
+[latest]: https://github.com/halostatue/fish-docker/releases/latest
