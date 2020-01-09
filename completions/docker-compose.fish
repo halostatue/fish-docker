@@ -10,7 +10,7 @@
 
 
 # common options
-complete --command docker-compose --description "Specify an alternate compose file" --condition '_halostatue_fish_docker_no_subcommand' --required --short-option f --long-option file
+complete --command docker-compose --description "Specify an alternate compose file" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --short-option f --long-option file
 complete --command docker-compose --description "Specify an alternate project name" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option p --long-option project-name
 complete --command docker-compose --description "Show more output" --condition '_halostatue_fish_docker_no_subcommand' --long-option verbose
 complete --command docker-compose --description "Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --long-option log-level
