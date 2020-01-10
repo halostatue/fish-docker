@@ -211,7 +211,7 @@ class Completion
 
   def generate_base(command)
     %W(complete --command #{command || @command}).tap { |base|
-      base.push('--description', @description.inspect) if @description
+      base.push('--description', @description.gsub(Regexp.escape(ENV['HOME']), '~').inspect) if @description
     }
   end
 

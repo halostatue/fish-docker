@@ -22,15 +22,15 @@ function _halostatue_fish_docker_no_subcommand --description 'Test if docker has
 end
 
 # common options
-complete --command docker --description "Location of client config files (default \"/Users/jroeder/.docker\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option config
+complete --command docker --description "Location of client config files (default \"~/.docker\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option config
 complete --command docker --description "Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var and default context set with \"docker context use\")" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option c --long-option context
 complete --command docker --description "Enable debug mode" --condition '_halostatue_fish_docker_no_subcommand' --short-option D --long-option debug
 complete --command docker --description "Daemon socket(s) to connect to" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option H --long-option host
 complete --command docker --description "Set the logging level (\"debug\"|\"info\"|\"warn\"|\"error\"|\"fatal\") (default \"info\")" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option l --long-option log-level
 complete --command docker --description "Use TLS; implied by --tlsverify" --condition '_halostatue_fish_docker_no_subcommand' --long-option tls
-complete --command docker --description "Trust certs signed only by this CA (default \"/Users/jroeder/.docker/ca.pem\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option tlscacert
-complete --command docker --description "Path to TLS certificate file (default \"/Users/jroeder/.docker/cert.pem\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option tlscert
-complete --command docker --description "Path to TLS key file (default \"/Users/jroeder/.docker/key.pem\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option tlskey
+complete --command docker --description "Trust certs signed only by this CA (default \"~/.docker/ca.pem\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option tlscacert
+complete --command docker --description "Path to TLS certificate file (default \"~/.docker/cert.pem\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option tlscert
+complete --command docker --description "Path to TLS key file (default \"~/.docker/key.pem\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option tlskey
 complete --command docker --description "Use TLS and verify the remote" --condition '_halostatue_fish_docker_no_subcommand' --long-option tlsverify
 complete --command docker --description "Print version information and quit" --condition '_halostatue_fish_docker_no_subcommand' --short-option v --long-option version
 
