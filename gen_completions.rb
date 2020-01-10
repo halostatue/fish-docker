@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 # frozen_string_literal: true
 
 # require 'byebug'
@@ -95,7 +96,7 @@ class Completion
       when :no_subcommand
         '_halostatue_fish_docker_no_subcommand'
       when :subcommand
-        args.map { |c| '_fish_seen_subcommand_from %{command}' % { command: c } }
+        args.map { |c| '__fish_seen_subcommand_from %{command}' % { command: c } }
       else
         condition << args.empty? ? statement : "#{statement} #{args.join(' ')}"
       end
@@ -210,7 +211,7 @@ class Completion
 
   def generate_base(command)
     %W(complete --command #{command || @command}).tap { |base|
-      base.push('--description', @description.inspect) if @description
+      base.push('--description', @description.gsub(Regexp.escape(ENV['HOME']), '~').inspect) if @description
     }
   end
 
@@ -236,7 +237,7 @@ class Completion
     [].tap { |flags|
       flags << '--keep-order' if @keep
       flags << '--no-files' if @no_files
-      flags << '--required' if @required
+      flags << '--require-parameter' if @required
       flags << '--exclusive' if @exclusive
     }
   end

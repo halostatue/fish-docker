@@ -8,7 +8,7 @@ function _halostatue_fish_docker_print_containers --description 'Print a list of
         case running
             set filter --filter status=running
         case stopped
-            set filter --filter status=exited --filter status=stopped
+            set filter --filter status=exited
     end
 
     docker ps --no-trunc $filter --format '{{.ID}}\n{{.Names}}' | tr ',' '\n'
