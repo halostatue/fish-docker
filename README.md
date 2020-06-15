@@ -6,7 +6,7 @@ Completions for [Docker] in the [fish shell], based on [docker-fish-completion].
 
 ## Installation
 
-Install with [Fisher] (recommended):
+Install with [Fisher](recommended):
 
 ```fish
 fisher add halostatue/fish-docker
@@ -19,6 +19,7 @@ fisher add halostatue/fish-docker
 
 Copy `completions/*.fish` and `conf.d/*.fish` to your fish configuration
 directory preserving the directory structure.
+
 </details>
 
 ### System Requirements
@@ -40,7 +41,16 @@ It has been tested with Ruby 2.6.
 
 ### Usage / Updating
 
+A `Makefile` has been added to make building this easier.
+
 ```fish
+make
+# OR
+
+make docker
+make docker-copmose
+
+# OR
 ./gen_completions.rb docker > completions/docker.fish
 ./gen_completions.rb docker-compose > completions/docker-compose.fish
 ```
@@ -50,7 +60,7 @@ It has been tested with Ruby 2.6.
 [MIT](LICENCE.md)
 
 [docker]: https://www.docker.com
-[fish shell]: https://fishshell.com "friendly interactive shell"
+[fish shell]: https://fishshell.com 'friendly interactive shell'
 [fisher]: https://github.com/jorgebucaran/fisher
 [fish]: https://github.com/fish-shell/fish-shell
 [docker-fish-completion]: https://github.com/barnybug-archive/docker-fish-completion
