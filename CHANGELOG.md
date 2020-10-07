@@ -1,5 +1,10 @@
 # fish-docker Changelog
 
+## 1.3
+
+- Completions updated for Docker version 19.03.13, build 4484c46d9d and
+  docker-compose version 1.27.4, build 40524192.
+
 ## 1.2
 
 - Small developer convenience Makefile added.

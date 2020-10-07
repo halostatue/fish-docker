@@ -12,6 +12,7 @@
 # common options
 complete --command docker-compose --description "Specify an alternate compose file" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --short-option f --long-option file
 complete --command docker-compose --description "Specify an alternate project name" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option p --long-option project-name
+complete --command docker-compose --description "Specify a context name" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option c --long-option context
 complete --command docker-compose --description "Show more output" --condition '_halostatue_fish_docker_no_subcommand' --long-option verbose
 complete --command docker-compose --description "Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --long-option log-level
 complete --command docker-compose --description "Do not print ANSI control characters" --condition '_halostatue_fish_docker_no_subcommand' --long-option no-ansi
@@ -37,7 +38,7 @@ complete --command docker-compose --description "Service" --condition '__fish_se
 # config
 complete --command docker-compose --description "Validate and view the Compose file" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'config'
 complete --command docker-compose --description "Pin image tags to digests." --condition '__fish_seen_subcommand_from config' --long-option resolve-image-digests
-complete --command docker-compose --description "Don't interpolate environment variables" --condition '__fish_seen_subcommand_from config' --long-option no-interpolate
+complete --command docker-compose --description "Don't interpolate environment variables." --condition '__fish_seen_subcommand_from config' --long-option no-interpolate
 complete --command docker-compose --description "Only validate the configuration, don't print" --condition '__fish_seen_subcommand_from config' --short-option q --long-option quiet
 complete --command docker-compose --description "Print the service names, one per line." --condition '__fish_seen_subcommand_from config' --long-option services
 complete --command docker-compose --description "Print the volume names, one per line." --condition '__fish_seen_subcommand_from config' --long-option volumes
@@ -178,7 +179,7 @@ complete --command docker-compose --description "Don't build an image, even if i
 complete --command docker-compose --description "Don't start the services after creating them." --condition '__fish_seen_subcommand_from up' --long-option no-start
 complete --command docker-compose --description "Build images before starting containers." --condition '__fish_seen_subcommand_from up' --long-option build
 complete --command docker-compose --description "Stops all containers if any container was" --condition '__fish_seen_subcommand_from up' --long-option abort-on-container-exit
-complete --command docker-compose --description "Attach to dependent containers" --condition '__fish_seen_subcommand_from up' --long-option attach-dependencies
+complete --command docker-compose --description "Attach to dependent containers." --condition '__fish_seen_subcommand_from up' --long-option attach-dependencies
 complete --command docker-compose --description "Use this timeout in seconds for container" --condition '__fish_seen_subcommand_from up' --exclusive --short-option t --long-option timeout
 complete --command docker-compose --description "Recreate anonymous volumes instead of retrieving" --condition '__fish_seen_subcommand_from up' --short-option V --long-option renew-anon-volumes
 complete --command docker-compose --description "Remove containers for services not defined" --condition '__fish_seen_subcommand_from up' --long-option remove-orphans
@@ -187,7 +188,7 @@ complete --command docker-compose --description "Scale SERVICE to NUM instances.
 complete --command docker-compose --description "Service" --condition '__fish_seen_subcommand_from up' --arguments '(_halostatue_fish_docker_print_compose_services )' --no-files
 
 # version
-complete --command docker-compose --description "Show the Docker-Compose version information" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'version'
+complete --command docker-compose --description "Show version information and quit" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'version'
 complete --command docker-compose --description "Shows only Compose's version number." --condition '__fish_seen_subcommand_from version' --long-option short
 
 

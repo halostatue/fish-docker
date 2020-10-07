@@ -65,14 +65,12 @@ complete --command docker --description "Memory limit" --condition '__fish_seen_
 complete --command docker --description "Swap limit equal to memory plus swap: '-1' to enable unlimited swap" --condition '__fish_seen_subcommand_from build' --exclusive --long-option memory-swap
 complete --command docker --description "Set the networking mode for the RUN instructions during build" --condition '__fish_seen_subcommand_from build' --exclusive --long-option network
 complete --command docker --description "Do not use cache when building the image" --condition '__fish_seen_subcommand_from build' --long-option no-cache
+complete --command docker --description "Output destination (format: type=local,dest=path)" --condition '__fish_seen_subcommand_from build' --exclusive --short-option o --long-option output
+complete --command docker --description "Set platform if server is multi-platform capable" --condition '__fish_seen_subcommand_from build' --exclusive --long-option platform
+complete --command docker --description "Set type of progress output (auto, plain, tty). Use plain to show" --condition '__fish_seen_subcommand_from build' --exclusive --long-option progress
 complete --command docker --description "Always attempt to pull a newer version of the image" --condition '__fish_seen_subcommand_from build' --long-option pull
 complete --command docker --description "Suppress the build output and print image ID on success" --condition '__fish_seen_subcommand_from build' --short-option q --long-option quiet
 complete --command docker --description "Remove intermediate containers after a successful build (default true)" --condition '__fish_seen_subcommand_from build' --long-option rm
-complete --command docker --description "Security options" --condition '__fish_seen_subcommand_from build' --exclusive --long-option security-opt
-complete --command docker --description "Size of /dev/shm" --condition '__fish_seen_subcommand_from build' --exclusive --long-option shm-size
-complete --command docker --description "Name and optionally a tag in the 'name:tag' format" --condition '__fish_seen_subcommand_from build' --exclusive --short-option t --long-option tag
-complete --command docker --description "Set the target build stage to build." --condition '__fish_seen_subcommand_from build' --exclusive --long-option target
-complete --command docker --description "Ulimit options (default [])" --condition '__fish_seen_subcommand_from build' --exclusive --long-option ulimit
 complete --command docker --description "PATH" --condition '__fish_seen_subcommand_from build' --require-parameter
 complete --command docker --description "URL" --condition '__fish_seen_subcommand_from build' --exclusive
 complete --command docker --description "STDIN" --condition '__fish_seen_subcommand_from build' --arguments '-' --exclusive
@@ -163,6 +161,7 @@ complete --command docker --description "Disable OOM Killer" --condition '__fish
 complete --command docker --description "Tune host's OOM preferences (-1000 to 1000)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option oom-score-adj
 complete --command docker --description "PID namespace to use" --condition '__fish_seen_subcommand_from create' --exclusive --long-option pid
 complete --command docker --description "Tune container pids limit (set -1 for unlimited)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option pids-limit
+complete --command docker --description "Set platform if server is multi-platform capable" --condition '__fish_seen_subcommand_from create' --exclusive --long-option platform
 complete --command docker --description "Give extended privileges to this container" --condition '__fish_seen_subcommand_from create' --long-option privileged
 complete --command docker --description "Publish a container's port(s) to the host" --condition '__fish_seen_subcommand_from create' --exclusive --short-option p --long-option publish
 complete --command docker --description "Publish all exposed ports to random ports" --condition '__fish_seen_subcommand_from create' --short-option P --long-option publish-all
@@ -242,6 +241,7 @@ complete --command docker --description "Repository" --condition '__fish_seen_su
 complete --command docker --description "Import the contents from a tarball to create a filesystem image" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'import'
 complete --command docker --description "Apply Dockerfile instruction to the created image" --condition '__fish_seen_subcommand_from import' --exclusive --short-option c --long-option change
 complete --command docker --description "Set commit message for imported image" --condition '__fish_seen_subcommand_from import' --exclusive --short-option m --long-option message
+complete --command docker --description "Set platform if server is multi-platform capable" --condition '__fish_seen_subcommand_from import' --exclusive --long-option platform
 complete --command docker --description "file" --condition '__fish_seen_subcommand_from import' --exclusive
 complete --command docker --description "URL" --condition '__fish_seen_subcommand_from import' --exclusive
 complete --command docker --description "STDIN" --condition '__fish_seen_subcommand_from import' --arguments '-' --exclusive
@@ -314,6 +314,7 @@ complete --command docker --description "Display total file sizes" --condition '
 complete --command docker --description "Pull an image or a repository from a registry" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'pull'
 complete --command docker --description "Download all tagged images in the repository" --condition '__fish_seen_subcommand_from pull' --short-option a --long-option all-tags
 complete --command docker --description "Skip image verification (default true)" --condition '__fish_seen_subcommand_from pull' --long-option disable-content-trust
+complete --command docker --description "Set platform if server is multi-platform capable" --condition '__fish_seen_subcommand_from pull' --exclusive --long-option platform
 complete --command docker --description "Suppress verbose output" --condition '__fish_seen_subcommand_from pull' --short-option q --long-option quiet
 complete --command docker --description "Repository" --condition '__fish_seen_subcommand_from pull' --arguments '(_halostatue_fish_docker_print_repositories )' --exclusive
 complete --command docker --description "Image" --condition '__fish_seen_subcommand_from pull' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
@@ -418,6 +419,7 @@ complete --command docker --description "Disable OOM Killer" --condition '__fish
 complete --command docker --description "Tune host's OOM preferences (-1000 to 1000)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option oom-score-adj
 complete --command docker --description "PID namespace to use" --condition '__fish_seen_subcommand_from run' --exclusive --long-option pid
 complete --command docker --description "Tune container pids limit (set -1 for unlimited)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option pids-limit
+complete --command docker --description "Set platform if server is multi-platform capable" --condition '__fish_seen_subcommand_from run' --exclusive --long-option platform
 complete --command docker --description "Give extended privileges to this container" --condition '__fish_seen_subcommand_from run' --long-option privileged
 complete --command docker --description "Publish a container's port(s) to the host" --condition '__fish_seen_subcommand_from run' --exclusive --short-option p --long-option publish
 complete --command docker --description "Publish all exposed ports to random ports" --condition '__fish_seen_subcommand_from run' --short-option P --long-option publish-all
@@ -462,6 +464,8 @@ complete --command docker --description "TERM" --condition '__fish_seen_subcomma
 # start
 complete --command docker --description "Start one or more stopped containers" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'start'
 complete --command docker --description "Attach STDOUT/STDERR and forward signals" --condition '__fish_seen_subcommand_from start' --short-option a --long-option attach
+complete --command docker --description "Restore from this checkpoint" --condition '__fish_seen_subcommand_from start' --exclusive --long-option checkpoint
+complete --command docker --description "Use a custom checkpoint storage directory" --condition '__fish_seen_subcommand_from start' --exclusive --long-option checkpoint-dir
 complete --command docker --description "Override the key sequence for detaching a container" --condition '__fish_seen_subcommand_from start' --exclusive --long-option detach-keys
 complete --command docker --description "Attach container's STDIN" --condition '__fish_seen_subcommand_from start' --short-option i --long-option interactive
 complete --command docker --description "Container" --condition '__fish_seen_subcommand_from start' --arguments '(_halostatue_fish_docker_print_containers stopped)' --exclusive
