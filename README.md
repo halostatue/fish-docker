@@ -9,7 +9,11 @@ Completions for [Docker] in the [fish shell], based on [docker-fish-completion].
 Install with [Fisher](recommended):
 
 ```fish
+# Fisher 3.x
 fisher add halostatue/fish-docker
+
+# Fisher 4.0+
+fisher install halostatue/fish-docker
 ```
 
 <details>
