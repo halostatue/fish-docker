@@ -1,5 +1,12 @@
 # fish-docker Changelog
 
+## 1.4
+
+- Updated `gen_completions.rb` to correctly separate subcommand detection for
+  both docker and docker-compose, also to erase existing completions.
+- Completions regenerated for Docker version 19.03.13, build 4484c46d9d and
+  docker-compose version 1.27.4, build 40524192.
+
 ## 1.3
 
 - Completions updated for Docker version 19.03.13, build 4484c46d9d and
