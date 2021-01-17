@@ -78,7 +78,7 @@ class Completion
     @long_options = []
     @old_options = []
     @arguments = []
-    @keep = @no_files = @required = @exclusive = false
+    @keep = @force_files = @no_files = @required = @exclusive = false
     @wraps = []
   end
 
@@ -133,9 +133,17 @@ class Completion
   end
 
   # -f or --no-files specifies that the options specified by this completion
-  # may not be followed by a filename.
+  # may not be followed by a filename. Will be ignored if +force_files+ has
+  # been set.
   def no_files
-    set(:@no_files)
+    set(:@no_files) unless @force_files
+  end
+
+  # -F or --force-files specifies that the options specified by this completion
+  # may be followed by a filename. Overrides +no_files+.
+  def force_files
+    set(:@no_files, to: false)
+    set(:@force_files)
   end
 
   # -r or --require-parameter specifies that the options specified by this
@@ -212,8 +220,8 @@ class Completion
     instance_variable_get(var).push(*Array(values))
   end
 
-  def set(var)
-    instance_variable_set(var, true)
+  def set(var, to: true)
+    instance_variable_set(var, to)
   end
 
   def generate_base(command)
@@ -244,6 +252,7 @@ class Completion
     [].tap { |flags|
       flags << '--keep-order' if @keep
       flags << '--no-files' if @no_files
+      flags << '--force-files' if @force_files
       flags << '--require-parameter' if @required
       flags << '--exclusive' if @exclusive
     }
@@ -308,11 +317,17 @@ class DockerCmdLine
   def subcommands
     @subcommands ||= begin
       log("Building subcommands for #{binary}")
-      parse_subcommands(@parts)
+      subcommand_groups.reduce([]) { |acc, group|
+        acc + parse_subcommands(@parts, group)
+      }
     end
   end
 
   private
+
+  def subcommand_groups
+    %w(commands management\ commands)
+  end
 
   def build_parts(lines)
     parts = Hash.new { |h, k| h[k] = [] }
@@ -383,8 +398,8 @@ class DockerCmdLine
     Switch.new(shorts, longs, description, metavar, self)
   end
 
-  def parse_subcommands(parts)
-    parts['commands'].map { |line| parse_subcommand(line) }.compact
+  def parse_subcommands(parts, name)
+    parts[name].map { |line| parse_subcommand(line) }.compact
   end
 
   def parse_subcommand(line)
@@ -395,6 +410,7 @@ class DockerCmdLine
 
   def build_subcommand(command, description)
     log("Building #{binary} #{command}")
+    command.gsub!(/\*$/, '')
     lines = output('help', command)
     parts = build_parts(lines)
     usage = parts['usage']&.first&.gsub(/ \| /, '|')
@@ -415,7 +431,9 @@ class DockerCmdLine
     Subcommand.new(command, description, args, switches)
   rescue
     puts lines
-    p usage, args
+    puts
+    puts "usage: #{usage.inspect}"
+    puts "args: #{args.inspect}"
     raise
   end
 end
@@ -424,6 +442,10 @@ end
 class DockerComposeCmdLine < DockerCmdLine
   def binary
     'docker-compose'
+  end
+
+  def subcommand_groups
+    %w(commands)
   end
 end
 
@@ -528,7 +550,7 @@ class DockerFishGenerator < BaseFishGenerator
           case sub.command
           when 'start', 'rm'
             'stopped'
-          when 'commit', 'diff', 'export', 'inspect'
+          when 'commit', 'diff', 'export', 'inspect', 'cp'
             'all'
           else
             'running'
@@ -537,21 +559,26 @@ class DockerFishGenerator < BaseFishGenerator
         completion.arg(command: '_halostatue_fish_docker_print_containers', args: select)
         completion.description('Container')
         completion.exclusive
-      when 'IMAGE'
+      when 'CONTAINER:SRC_PATH'
+        completion.arg(command: '_halostatue_fish_docker_print_containers', args: 'all :')
+        completion.description(arg)
+        completion.exclusive
+      when 'IMAGE', 'SOURCE_IMAGE', 'TARGET_IMAGE'
         completion.arg(command: '_halostatue_fish_docker_print_images')
         completion.description('Image')
         completion.exclusive
-      when 'REPOSITORY'
+      when 'REPOSITORY', '[REPOSITORY[:TAG]]'
         completion.arg(command: '_halostatue_fish_docker_print_repositories')
         completion.description('Repository')
         completion.exclusive
+      when 'PATH', 'FILE', 'DEST_PATH', 'file'
+        completion.description(arg)
+        completion.required
+        completion.force_files
       when '-'
         completion.arg('-')
         completion.description('STDIN')
         completion.exclusive
-      when 'PATH', 'FILE'
-        completion.description(arg)
-        completion.required
       else
         completion.description(arg)
         completion.exclusive

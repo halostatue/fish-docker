@@ -2,16 +2,20 @@ function _halostatue_fish_docker_uninstall -e halostatue_fish_docker_uninstall
     functions -e (functions -a | command awk '/_halostatue_fish_docker_/')
 end
 
-function _halostatue_fish_docker_print_containers --description 'Print a list of docker containers' -a select
-    set -l filter -- --all
+function _halostatue_fish_docker_print_containers --description 'Print a list of docker containers' -a select append
+    set -l filter
     switch $select
         case running
             set filter --filter status=running
         case stopped
             set filter --filter status=exited
+        case '*'
+            set filter --all
     end
 
-    docker ps --no-trunc $filter --format '{{.ID}}\n{{.Names}}' | tr ',' '\n'
+    test -z $append; and set append ''
+
+    docker ps --no-trunc $filter --format '{{.ID}}\n{{.Names}}' | tr ',' $append'\n'
 end
 
 function _halostatue_fish_docker_print_images --description 'Print a list of docker images'
