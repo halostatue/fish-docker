@@ -23,10 +23,10 @@ end
 
 # common options
 complete --command docker --description "Location of client config files (default \"~/.docker\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option config
-complete --command docker --description "Name of the context to use to connect to the daemon (overrides" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option c --long-option context
+complete --command docker --description "Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option c --long-option context
 complete --command docker --description "Enable debug mode" --condition '_halostatue_fish_docker_no_subcommand' --short-option D --long-option debug
 complete --command docker --description "Daemon socket(s) to connect to" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option H --long-option host
-complete --command docker --description "Set the logging level (\"debug\"|\"info\"|\"warn\"|\"error\"|\"fatal\") (default" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option l --long-option log-level
+complete --command docker --description "Set the logging level (\"debug\"|\"info\"|\"warn\"|\"error\"|\"fatal\") (default \"info\")" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option l --long-option log-level
 complete --command docker --description "Use TLS; implied by --tlsverify" --condition '_halostatue_fish_docker_no_subcommand' --long-option tls
 complete --command docker --description "Trust certs signed only by this CA (default \"~/.docker/ca.pem\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option tlscacert
 complete --command docker --description "Path to TLS certificate file (default \"~/.docker/cert.pem\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option tlscert
@@ -48,31 +48,18 @@ complete --command docker --description "Build an image from a Dockerfile" --con
 complete --command docker --description "Add a custom host-to-IP mapping (host:ip)" --condition '__fish_seen_subcommand_from build' --exclusive --long-option add-host
 complete --command docker --description "Set build-time variables" --condition '__fish_seen_subcommand_from build' --exclusive --long-option build-arg
 complete --command docker --description "Images to consider as cache sources" --condition '__fish_seen_subcommand_from build' --exclusive --long-option cache-from
-complete --command docker --description "Optional parent cgroup for the container" --condition '__fish_seen_subcommand_from build' --exclusive --long-option cgroup-parent
-complete --command docker --description "Compress the build context using gzip" --condition '__fish_seen_subcommand_from build' --long-option compress
-complete --command docker --description "Limit the CPU CFS (Completely Fair Scheduler) period" --condition '__fish_seen_subcommand_from build' --exclusive --long-option cpu-period
-complete --command docker --description "Limit the CPU CFS (Completely Fair Scheduler) quota" --condition '__fish_seen_subcommand_from build' --exclusive --long-option cpu-quota
-complete --command docker --description "CPU shares (relative weight)" --condition '__fish_seen_subcommand_from build' --exclusive --short-option c --long-option cpu-shares
-complete --command docker --description "CPUs in which to allow execution (0-3, 0,1)" --condition '__fish_seen_subcommand_from build' --exclusive --long-option cpuset-cpus
-complete --command docker --description "MEMs in which to allow execution (0-3, 0,1)" --condition '__fish_seen_subcommand_from build' --exclusive --long-option cpuset-mems
 complete --command docker --description "Skip image verification (default true)" --condition '__fish_seen_subcommand_from build' --long-option disable-content-trust
 complete --command docker --description "Name of the Dockerfile (Default is 'PATH/Dockerfile')" --condition '__fish_seen_subcommand_from build' --exclusive --short-option f --long-option file
-complete --command docker --description "Always remove intermediate containers" --condition '__fish_seen_subcommand_from build' --long-option force-rm
 complete --command docker --description "Write the image ID to the file" --condition '__fish_seen_subcommand_from build' --exclusive --long-option iidfile
 complete --command docker --description "Container isolation technology" --condition '__fish_seen_subcommand_from build' --exclusive --long-option isolation
 complete --command docker --description "Set metadata for an image" --condition '__fish_seen_subcommand_from build' --exclusive --long-option label
-complete --command docker --description "Memory limit" --condition '__fish_seen_subcommand_from build' --exclusive --short-option m --long-option memory
-complete --command docker --description "Swap limit equal to memory plus swap: '-1' to enable unlimited swap" --condition '__fish_seen_subcommand_from build' --exclusive --long-option memory-swap
-complete --command docker --description "Set the networking mode for the RUN instructions during build" --condition '__fish_seen_subcommand_from build' --exclusive --long-option network
+complete --command docker --description "Set the networking mode for the RUN instructions during build (default \"default\")" --condition '__fish_seen_subcommand_from build' --exclusive --long-option network
 complete --command docker --description "Do not use cache when building the image" --condition '__fish_seen_subcommand_from build' --long-option no-cache
+complete --command docker --description "Output destination (format: type=local,dest=path)" --condition '__fish_seen_subcommand_from build' --exclusive --short-option o --long-option output
+complete --command docker --description "Set platform if server is multi-platform capable" --condition '__fish_seen_subcommand_from build' --exclusive --long-option platform
+complete --command docker --description "Set type of progress output (auto, plain, tty). Use plain to show container" --condition '__fish_seen_subcommand_from build' --exclusive --long-option progress
 complete --command docker --description "Always attempt to pull a newer version of the image" --condition '__fish_seen_subcommand_from build' --long-option pull
 complete --command docker --description "Suppress the build output and print image ID on success" --condition '__fish_seen_subcommand_from build' --short-option q --long-option quiet
-complete --command docker --description "Remove intermediate containers after a successful build (default true)" --condition '__fish_seen_subcommand_from build' --long-option rm
-complete --command docker --description "Security options" --condition '__fish_seen_subcommand_from build' --exclusive --long-option security-opt
-complete --command docker --description "Size of /dev/shm" --condition '__fish_seen_subcommand_from build' --exclusive --long-option shm-size
-complete --command docker --description "Name and optionally a tag in the 'name:tag' format" --condition '__fish_seen_subcommand_from build' --exclusive --short-option t --long-option tag
-complete --command docker --description "Set the target build stage to build." --condition '__fish_seen_subcommand_from build' --exclusive --long-option target
-complete --command docker --description "Ulimit options (default [])" --condition '__fish_seen_subcommand_from build' --exclusive --long-option ulimit
 complete --command docker --description "PATH" --condition '__fish_seen_subcommand_from build' --force-files --require-parameter
 complete --command docker --description "URL" --condition '__fish_seen_subcommand_from build' --exclusive
 complete --command docker --description "STDIN" --condition '__fish_seen_subcommand_from build' --arguments '-' --exclusive
@@ -98,13 +85,13 @@ complete --command docker --description "STDIN" --condition '__fish_seen_subcomm
 complete --command docker --description "Create a new container" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'create'
 complete --command docker --description "Add a custom host-to-IP mapping (host:ip)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option add-host
 complete --command docker --description "Attach to STDIN, STDOUT or STDERR" --condition '__fish_seen_subcommand_from create' --exclusive --short-option a --long-option attach
-complete --command docker --description "Block IO (relative weight), between 10 and 1000, or 0 to" --condition '__fish_seen_subcommand_from create' --exclusive --long-option blkio-weight
+complete --command docker --description "Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option blkio-weight
 complete --command docker --description "Block IO weight (relative device weight) (default [])" --condition '__fish_seen_subcommand_from create' --exclusive --long-option blkio-weight-device
 complete --command docker --description "Add Linux capabilities" --condition '__fish_seen_subcommand_from create' --exclusive --long-option cap-add
 complete --command docker --description "Drop Linux capabilities" --condition '__fish_seen_subcommand_from create' --exclusive --long-option cap-drop
 complete --command docker --description "Optional parent cgroup for the container" --condition '__fish_seen_subcommand_from create' --exclusive --long-option cgroup-parent
 complete --command docker --description "Cgroup namespace to use (host|private)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option cgroupns
-complete --command docker --description "Run the container in the Docker host's cgroup" --condition '__fish_seen_subcommand_from create' --short-option 'host':
+complete --command docker --description "Run the container in the Docker host's cgroup namespace" --condition '__fish_seen_subcommand_from create' --short-option 'host':
 complete --command docker --description "Use the cgroup namespace as configured by the" --condition '__fish_seen_subcommand_from create' --short-option '':
 complete --command docker --description "Write the container ID to the file" --condition '__fish_seen_subcommand_from create' --exclusive --long-option cidfile
 complete --command docker --description "Limit CPU CFS (Completely Fair Scheduler) period" --condition '__fish_seen_subcommand_from create' --exclusive --long-option cpu-period
@@ -135,11 +122,11 @@ complete --command docker --description "Add additional groups to join" --condit
 complete --command docker --description "Command to run to check health" --condition '__fish_seen_subcommand_from create' --exclusive --long-option health-cmd
 complete --command docker --description "Time between running the check (ms|s|m|h) (default 0s)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option health-interval
 complete --command docker --description "Consecutive failures needed to report unhealthy" --condition '__fish_seen_subcommand_from create' --exclusive --long-option health-retries
-complete --command docker --description "Start period for the container to initialize before" --condition '__fish_seen_subcommand_from create' --exclusive --long-option health-start-period
+complete --command docker --description "Start period for the container to initialize before starting" --condition '__fish_seen_subcommand_from create' --exclusive --long-option health-start-period
 complete --command docker --description "Maximum time to allow one check to run (ms|s|m|h) (default 0s)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option health-timeout
 complete --command docker --description "Print usage" --condition '__fish_seen_subcommand_from create' --long-option help
 complete --command docker --description "Container host name" --condition '__fish_seen_subcommand_from create' --exclusive --short-option h --long-option hostname
-complete --command docker --description "Run an init inside the container that forwards signals and" --condition '__fish_seen_subcommand_from create' --long-option init
+complete --command docker --description "Run an init inside the container that forwards signals and reaps processes" --condition '__fish_seen_subcommand_from create' --long-option init
 complete --command docker --description "Keep STDIN open even if not attached" --condition '__fish_seen_subcommand_from create' --short-option i --long-option interactive
 complete --command docker --description "IPv4 address (e.g., 172.30.100.104)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option ip
 complete --command docker --description "IPv6 address (e.g., 2001:db8::33)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option ip6
@@ -155,7 +142,7 @@ complete --command docker --description "Log driver options" --condition '__fish
 complete --command docker --description "Container MAC address (e.g., 92:d0:c6:0a:29:33)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option mac-address
 complete --command docker --description "Memory limit" --condition '__fish_seen_subcommand_from create' --exclusive --short-option m --long-option memory
 complete --command docker --description "Memory soft limit" --condition '__fish_seen_subcommand_from create' --exclusive --long-option memory-reservation
-complete --command docker --description "Swap limit equal to memory plus swap: '-1' to enable" --condition '__fish_seen_subcommand_from create' --exclusive --long-option memory-swap
+complete --command docker --description "Swap limit equal to memory plus swap: '-1' to enable unlimited swap" --condition '__fish_seen_subcommand_from create' --exclusive --long-option memory-swap
 complete --command docker --description "Tune container memory swappiness (0 to 100) (default -1)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option memory-swappiness
 complete --command docker --description "Attach a filesystem mount to the container" --condition '__fish_seen_subcommand_from create' --exclusive --long-option mount
 complete --command docker --description "Assign a name to the container" --condition '__fish_seen_subcommand_from create' --exclusive --long-option name
@@ -170,7 +157,7 @@ complete --command docker --description "Set platform if server is multi-platfor
 complete --command docker --description "Give extended privileges to this container" --condition '__fish_seen_subcommand_from create' --long-option privileged
 complete --command docker --description "Publish a container's port(s) to the host" --condition '__fish_seen_subcommand_from create' --exclusive --short-option p --long-option publish
 complete --command docker --description "Publish all exposed ports to random ports" --condition '__fish_seen_subcommand_from create' --short-option P --long-option publish-all
-complete --command docker --description "Pull image before creating (\"always\"|\"missing\"|\"never\")" --condition '__fish_seen_subcommand_from create' --exclusive --long-option pull
+complete --command docker --description "Pull image before creating (\"always\"|\"missing\"|\"never\") (default \"missing\")" --condition '__fish_seen_subcommand_from create' --exclusive --long-option pull
 complete --command docker --description "Mount the container's root filesystem as read only" --condition '__fish_seen_subcommand_from create' --long-option read-only
 complete --command docker --description "Restart policy to apply when a container exits (default \"no\")" --condition '__fish_seen_subcommand_from create' --exclusive --long-option restart
 complete --command docker --description "Automatically remove the container when it exits" --condition '__fish_seen_subcommand_from create' --long-option rm
@@ -291,10 +278,10 @@ complete --command docker --description "[SERVER]" --condition '__fish_seen_subc
 complete --command docker --description "Fetch the logs of a container" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'logs'
 complete --command docker --description "Show extra details provided to logs" --condition '__fish_seen_subcommand_from logs' --long-option details
 complete --command docker --description "Follow log output" --condition '__fish_seen_subcommand_from logs' --short-option f --long-option follow
-complete --command docker --description "Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m" --condition '__fish_seen_subcommand_from logs' --exclusive --long-option since
+complete --command docker --description "Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)" --condition '__fish_seen_subcommand_from logs' --exclusive --long-option since
 complete --command docker --description "Number of lines to show from the end of the logs (default \"all\")" --condition '__fish_seen_subcommand_from logs' --exclusive --short-option n --long-option tail
 complete --command docker --description "Show timestamps" --condition '__fish_seen_subcommand_from logs' --short-option t --long-option timestamps
-complete --command docker --description "Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g." --condition '__fish_seen_subcommand_from logs' --exclusive --long-option until
+complete --command docker --description "Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42" --condition '__fish_seen_subcommand_from logs' --exclusive --long-option until
 complete --command docker --description "Container" --condition '__fish_seen_subcommand_from logs' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 
 # pause
@@ -361,13 +348,13 @@ complete --command docker --description "Image" --condition '__fish_seen_subcomm
 complete --command docker --description "Run a command in a new container" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'run'
 complete --command docker --description "Add a custom host-to-IP mapping (host:ip)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option add-host
 complete --command docker --description "Attach to STDIN, STDOUT or STDERR" --condition '__fish_seen_subcommand_from run' --exclusive --short-option a --long-option attach
-complete --command docker --description "Block IO (relative weight), between 10 and 1000, or 0 to" --condition '__fish_seen_subcommand_from run' --exclusive --long-option blkio-weight
+complete --command docker --description "Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option blkio-weight
 complete --command docker --description "Block IO weight (relative device weight) (default [])" --condition '__fish_seen_subcommand_from run' --exclusive --long-option blkio-weight-device
 complete --command docker --description "Add Linux capabilities" --condition '__fish_seen_subcommand_from run' --exclusive --long-option cap-add
 complete --command docker --description "Drop Linux capabilities" --condition '__fish_seen_subcommand_from run' --exclusive --long-option cap-drop
 complete --command docker --description "Optional parent cgroup for the container" --condition '__fish_seen_subcommand_from run' --exclusive --long-option cgroup-parent
 complete --command docker --description "Cgroup namespace to use (host|private)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option cgroupns
-complete --command docker --description "Run the container in the Docker host's cgroup" --condition '__fish_seen_subcommand_from run' --short-option 'host':
+complete --command docker --description "Run the container in the Docker host's cgroup namespace" --condition '__fish_seen_subcommand_from run' --short-option 'host':
 complete --command docker --description "Use the cgroup namespace as configured by the" --condition '__fish_seen_subcommand_from run' --short-option '':
 complete --command docker --description "Write the container ID to the file" --condition '__fish_seen_subcommand_from run' --exclusive --long-option cidfile
 complete --command docker --description "Limit CPU CFS (Completely Fair Scheduler) period" --condition '__fish_seen_subcommand_from run' --exclusive --long-option cpu-period
@@ -400,11 +387,11 @@ complete --command docker --description "Add additional groups to join" --condit
 complete --command docker --description "Command to run to check health" --condition '__fish_seen_subcommand_from run' --exclusive --long-option health-cmd
 complete --command docker --description "Time between running the check (ms|s|m|h) (default 0s)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option health-interval
 complete --command docker --description "Consecutive failures needed to report unhealthy" --condition '__fish_seen_subcommand_from run' --exclusive --long-option health-retries
-complete --command docker --description "Start period for the container to initialize before" --condition '__fish_seen_subcommand_from run' --exclusive --long-option health-start-period
+complete --command docker --description "Start period for the container to initialize before starting" --condition '__fish_seen_subcommand_from run' --exclusive --long-option health-start-period
 complete --command docker --description "Maximum time to allow one check to run (ms|s|m|h) (default 0s)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option health-timeout
 complete --command docker --description "Print usage" --condition '__fish_seen_subcommand_from run' --long-option help
 complete --command docker --description "Container host name" --condition '__fish_seen_subcommand_from run' --exclusive --short-option h --long-option hostname
-complete --command docker --description "Run an init inside the container that forwards signals and" --condition '__fish_seen_subcommand_from run' --long-option init
+complete --command docker --description "Run an init inside the container that forwards signals and reaps processes" --condition '__fish_seen_subcommand_from run' --long-option init
 complete --command docker --description "Keep STDIN open even if not attached" --condition '__fish_seen_subcommand_from run' --short-option i --long-option interactive
 complete --command docker --description "IPv4 address (e.g., 172.30.100.104)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option ip
 complete --command docker --description "IPv6 address (e.g., 2001:db8::33)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option ip6
@@ -420,7 +407,7 @@ complete --command docker --description "Log driver options" --condition '__fish
 complete --command docker --description "Container MAC address (e.g., 92:d0:c6:0a:29:33)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option mac-address
 complete --command docker --description "Memory limit" --condition '__fish_seen_subcommand_from run' --exclusive --short-option m --long-option memory
 complete --command docker --description "Memory soft limit" --condition '__fish_seen_subcommand_from run' --exclusive --long-option memory-reservation
-complete --command docker --description "Swap limit equal to memory plus swap: '-1' to enable" --condition '__fish_seen_subcommand_from run' --exclusive --long-option memory-swap
+complete --command docker --description "Swap limit equal to memory plus swap: '-1' to enable unlimited swap" --condition '__fish_seen_subcommand_from run' --exclusive --long-option memory-swap
 complete --command docker --description "Tune container memory swappiness (0 to 100) (default -1)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option memory-swappiness
 complete --command docker --description "Attach a filesystem mount to the container" --condition '__fish_seen_subcommand_from run' --exclusive --long-option mount
 complete --command docker --description "Assign a name to the container" --condition '__fish_seen_subcommand_from run' --exclusive --long-option name
@@ -435,7 +422,7 @@ complete --command docker --description "Set platform if server is multi-platfor
 complete --command docker --description "Give extended privileges to this container" --condition '__fish_seen_subcommand_from run' --long-option privileged
 complete --command docker --description "Publish a container's port(s) to the host" --condition '__fish_seen_subcommand_from run' --exclusive --short-option p --long-option publish
 complete --command docker --description "Publish all exposed ports to random ports" --condition '__fish_seen_subcommand_from run' --short-option P --long-option publish-all
-complete --command docker --description "Pull image before running (\"always\"|\"missing\"|\"never\")" --condition '__fish_seen_subcommand_from run' --exclusive --long-option pull
+complete --command docker --description "Pull image before running (\"always\"|\"missing\"|\"never\") (default \"missing\")" --condition '__fish_seen_subcommand_from run' --exclusive --long-option pull
 complete --command docker --description "Mount the container's root filesystem as read only" --condition '__fish_seen_subcommand_from run' --long-option read-only
 complete --command docker --description "Restart policy to apply when a container exits (default \"no\")" --condition '__fish_seen_subcommand_from run' --exclusive --long-option restart
 complete --command docker --description "Automatically remove the container when it exits" --condition '__fish_seen_subcommand_from run' --long-option rm
@@ -511,7 +498,7 @@ complete --command docker --description "Container" --condition '__fish_seen_sub
 
 # update
 complete --command docker --description "Update configuration of one or more containers" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'update'
-complete --command docker --description "Block IO (relative weight), between 10 and 1000, or 0 to" --condition '__fish_seen_subcommand_from update' --exclusive --long-option blkio-weight
+complete --command docker --description "Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)" --condition '__fish_seen_subcommand_from update' --exclusive --long-option blkio-weight
 complete --command docker --description "Limit CPU CFS (Completely Fair Scheduler) period" --condition '__fish_seen_subcommand_from update' --exclusive --long-option cpu-period
 complete --command docker --description "Limit CPU CFS (Completely Fair Scheduler) quota" --condition '__fish_seen_subcommand_from update' --exclusive --long-option cpu-quota
 complete --command docker --description "Limit the CPU real-time period in microseconds" --condition '__fish_seen_subcommand_from update' --exclusive --long-option cpu-rt-period
@@ -548,7 +535,7 @@ complete --command docker --description "Manage builds" --condition '_halostatue
 complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from builder' --exclusive
 
 # buildx
-complete --command docker --description "Build with BuildKit (Docker Inc., v0.4.2-docker)" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'buildx'
+complete --command docker --description "Build with BuildKit (Docker Inc., v0.5.1-docker)" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'buildx'
 complete --command docker --description "Override the configured builder instance" --condition '__fish_seen_subcommand_from buildx' --exclusive --long-option builder
 complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from buildx' --exclusive
 
@@ -585,14 +572,14 @@ complete --command docker --description "Manage plugins" --condition '_halostatu
 complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from plugin' --exclusive
 
 # scan
-complete --command docker --description "Docker Scan (Docker Inc., v0.5.0)" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'scan'
+complete --command docker --description "Docker Scan (Docker Inc., v0.6.0)" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'scan'
 complete --command docker --description "Accept using a third party scanning provider" --condition '__fish_seen_subcommand_from scan' --long-option accept-license
 complete --command docker --description "Show dependency tree with scan results" --condition '__fish_seen_subcommand_from scan' --long-option dependency-tree
 complete --command docker --description "Exclude base image from vulnerability scanning (requires --file)" --condition '__fish_seen_subcommand_from scan' --long-option exclude-base
 complete --command docker --description "Dockerfile associated with image, provides more detailed results" --condition '__fish_seen_subcommand_from scan' --exclusive --short-option f --long-option file
-complete --command docker --description "Aggregate duplicated vulnerabilities and group them to a single one" --condition '__fish_seen_subcommand_from scan' --long-option group-issues
+complete --command docker --description "Aggregate duplicated vulnerabilities and group them to a single one (requires --json)" --condition '__fish_seen_subcommand_from scan' --long-option group-issues
 complete --command docker --description "Output results in JSON format" --condition '__fish_seen_subcommand_from scan' --long-option json
-complete --command docker --description "Authenticate to the scan provider using an optional token (with" --condition '__fish_seen_subcommand_from scan' --long-option login
+complete --command docker --description "Authenticate to the scan provider using an optional token (with --token), or web base" --condition '__fish_seen_subcommand_from scan' --long-option login
 complete --command docker --description "Reject using a third party scanning provider" --condition '__fish_seen_subcommand_from scan' --long-option reject-license
 complete --command docker --description "Only report vulnerabilities of provided level or higher (low|medium|high)" --condition '__fish_seen_subcommand_from scan' --exclusive --long-option severity
 complete --command docker --description "Authentication token to login to the third party scanning provider" --condition '__fish_seen_subcommand_from scan' --exclusive --long-option token

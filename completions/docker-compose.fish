@@ -20,10 +20,12 @@ end
 # common options
 complete --command docker-compose --description "Specify an alternate compose file" --condition '_halostatue_fish_docker_compose_no_subcommand' --require-parameter --short-option f --long-option file
 complete --command docker-compose --description "Specify an alternate project name" --condition '_halostatue_fish_docker_compose_no_subcommand' --exclusive --short-option p --long-option project-name
+complete --command docker-compose --description "Specify a profile to enable" --condition '_halostatue_fish_docker_compose_no_subcommand' --exclusive --long-option profile
 complete --command docker-compose --description "Specify a context name" --condition '_halostatue_fish_docker_compose_no_subcommand' --exclusive --short-option c --long-option context
 complete --command docker-compose --description "Show more output" --condition '_halostatue_fish_docker_compose_no_subcommand' --long-option verbose
 complete --command docker-compose --description "Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)" --condition '_halostatue_fish_docker_compose_no_subcommand' --exclusive --long-option log-level
-complete --command docker-compose --description "Do not print ANSI control characters" --condition '_halostatue_fish_docker_compose_no_subcommand' --long-option no-ansi
+complete --command docker-compose --description "Control when to print ANSI control characters" --condition '_halostatue_fish_docker_compose_no_subcommand' --exclusive --long-option ansi
+complete --command docker-compose --description "Do not print ANSI control characters (DEPRECATED)" --condition '_halostatue_fish_docker_compose_no_subcommand' --long-option no-ansi
 complete --command docker-compose --description "Print version and exit" --condition '_halostatue_fish_docker_compose_no_subcommand' --short-option v --long-option version
 complete --command docker-compose --description "Daemon socket to connect to" --condition '_halostatue_fish_docker_compose_no_subcommand' --exclusive --short-option H --long-option host
 
@@ -48,6 +50,7 @@ complete --command docker-compose --description "Validate and view the Compose f
 complete --command docker-compose --description "Pin image tags to digests." --condition '__fish_seen_subcommand_from config' --long-option resolve-image-digests
 complete --command docker-compose --description "Don't interpolate environment variables." --condition '__fish_seen_subcommand_from config' --long-option no-interpolate
 complete --command docker-compose --description "Only validate the configuration, don't print" --condition '__fish_seen_subcommand_from config' --short-option q --long-option quiet
+complete --command docker-compose --description "Print the profile names, one per line." --condition '__fish_seen_subcommand_from config' --long-option profiles
 complete --command docker-compose --description "Print the service names, one per line." --condition '__fish_seen_subcommand_from config' --long-option services
 complete --command docker-compose --description "Print the volume names, one per line." --condition '__fish_seen_subcommand_from config' --long-option volumes
 complete --command docker-compose --description "Print the service config hash, one per line." --condition '__fish_seen_subcommand_from config' --long-option hash="*"
@@ -61,7 +64,7 @@ complete --command docker-compose --description "Build images before creating co
 complete --command docker-compose --description "Service" --condition '__fish_seen_subcommand_from create' --arguments '(_halostatue_fish_docker_print_compose_services )' --no-files
 
 # down
-complete --command docker-compose --description "Stop and remove containers, networks, images, and volumes" --condition '_halostatue_fish_docker_compose_no_subcommand' --arguments 'down'
+complete --command docker-compose --description "Stop and remove resources" --condition '_halostatue_fish_docker_compose_no_subcommand' --arguments 'down'
 
 # events
 complete --command docker-compose --description "Receive real time events from containers" --condition '_halostatue_fish_docker_compose_no_subcommand' --arguments 'events'
@@ -95,6 +98,7 @@ complete --command docker-compose --description "Produce monochrome output." --c
 complete --command docker-compose --description "Follow log output." --condition '__fish_seen_subcommand_from logs' --short-option f --long-option follow
 complete --command docker-compose --description "Show timestamps." --condition '__fish_seen_subcommand_from logs' --short-option t --long-option timestamps
 complete --command docker-compose --description "Number of lines to show from the end of the logs" --condition '__fish_seen_subcommand_from logs' --long-option tail="all"
+complete --command docker-compose --description "Don't print prefix in logs." --condition '__fish_seen_subcommand_from logs' --long-option no-log-prefix
 complete --command docker-compose --description "Service" --condition '__fish_seen_subcommand_from logs' --arguments '(_halostatue_fish_docker_print_compose_services )' --no-files
 
 # pause
@@ -193,6 +197,7 @@ complete --command docker-compose --description "Recreate anonymous volumes inst
 complete --command docker-compose --description "Remove containers for services not defined" --condition '__fish_seen_subcommand_from up' --long-option remove-orphans
 complete --command docker-compose --description "Return the exit code of the selected service" --condition '__fish_seen_subcommand_from up' --exclusive --long-option exit-code-from
 complete --command docker-compose --description "Scale SERVICE to NUM instances. Overrides the" --condition '__fish_seen_subcommand_from up' --exclusive --long-option scale
+complete --command docker-compose --description "Don't print prefix in logs." --condition '__fish_seen_subcommand_from up' --long-option no-log-prefix
 complete --command docker-compose --description "Service" --condition '__fish_seen_subcommand_from up' --arguments '(_halostatue_fish_docker_print_compose_services )' --no-files
 
 # version

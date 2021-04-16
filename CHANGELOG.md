@@ -1,5 +1,12 @@
 # fish-docker Changelog
 
+## 1.6
+
+- Completions regenerated for Docker version 20.10.5, build 55c4c88 and
+  docker-compose version 1.29.0, build 07737305. As with
+  `halostatue/fish-docker` 1.5, `docker compose` completions are not yet
+  present.
+
 ## 1.5
 
 - Updated `gen_completion.rb` to include `management commands` for Docker.
