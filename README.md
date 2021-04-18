@@ -3,7 +3,6 @@
 Completions for [Docker] in the [fish shell], based on
 [docker-fish-completion].
 
-
 ## Comparisons with Other Docker Completions
 
 - Docker contrib completions ([docker][docker.fish] and
@@ -70,7 +69,7 @@ make docker-compose
 ./gen_completions.rb docker-compose > completions/docker-compose.fish
 ```
 
-## License
+## Licence
 
 [MIT](LICENCE.md)
 
