@@ -1,13 +1,13 @@
 # fish-docker Changelog
 
-## 1.6
+## 1.6 / 2021-04-15
 
 - Completions regenerated for Docker version 20.10.5, build 55c4c88 and
   docker-compose version 1.29.0, build 07737305. As with
   `halostatue/fish-docker` 1.5, `docker compose` completions are not yet
   present.
 
-## 1.5
+## 1.5 / 2021-01-17
 
 - Updated `gen_completion.rb` to include `management commands` for Docker.
 - Use `--force-files` when completing `file`, `PATH`, `FILE`, or `DEST_PATH`
@@ -20,30 +20,30 @@
   commands can be reached with `docker compose`, but that this information is
   not yet returned from `docker --help`.
 
-## 1.4
+## 1.4 / 2020-11-29
 
 - Updated `gen_completions.rb` to correctly separate sub-command detection
   for both docker and docker-compose, also to erase existing completions.
 - Completions regenerated for Docker version 19.03.13, build 4484c46d9d and
   docker-compose version 1.27.4, build 40524192.
 
-## 1.3
+## 1.3 / 2020-10-06
 
 - Completions updated for Docker version 19.03.13, build 4484c46d9d and
   docker-compose version 1.27.4, build 40524192.
 
-## 1.2
+## 1.2 / 2020-06-14
 
 - Small developer convenience Makefile added.
 - Completions updated as of Docker version 19.03.8, build afacb8b and
   docker-compose version 1.25.5, build 8a1c60f6.
 
-## 1.1
+## 1.1 / 2020-01-10
 
 - Fixes and an update provided by James Roeder (@jmaroeder) as [#1]. Thanks
   for the contribution!
 
-## 1.0
+## 1.0 / 2019-12-31
 
 - Initial version, forked from [docker-fish-completion][].
 
