@@ -1,5 +1,11 @@
 # fish-docker Changelog
 
+## 1.7 / 2022-04-01
+
+- Completion regenerated for Docker 20.10.12, build e91ed57 and docker-compose
+  version 1.29.2, build 5becea4c. `docker compose` completions may not be
+  complete as no updates to the parser have been made.
+
 ## 1.6 / 2021-04-15
 
 - Completions regenerated for Docker version 20.10.5, build 55c4c88 and
