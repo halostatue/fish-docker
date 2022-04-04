@@ -1,7 +1,9 @@
 # halostatue/fish-docker
 
-Completions for [Docker] in the [fish shell], based on
-[docker-fish-completion].
+[![Version][]](https://github.com/halostatue/fish-brew/releases)
+
+Completions for [Docker][] in the [fish shell][], based on
+[docker-fish-completion][].
 
 ## Comparisons with Other Docker Completions
 
@@ -10,7 +12,7 @@ Completions for [Docker] in the [fish shell], based on
   [docker-fish-completion], and the Ruby script is substantially more accurate.
   Also, the docker-compose completions are a fraction of what can be discovered.
 
-- [lewisacidic/fish-docker]: In addition to using the Docker contrib
+- [lewisacidic/fish-docker][]: In addition to using the Docker contrib
   completions, but also adds a number of additional helper functions that aren't
   wanted by this author.
 
@@ -20,10 +22,10 @@ Completions for [Docker] in the [fish shell], based on
 
 ## Installation
 
-Install with [Fisher] (recommended):
+Install with [Fisher][] (recommended):
 
 ```fish
-fisher install halostatue/fish-docker
+fisher install halostatue/fish-docker@1.x
 ```
 
 <details>
@@ -39,7 +41,7 @@ directory preserving the directory structure.
 ### System Requirements
 
 - [fish][fish shell] 3.0+
-- [Docker]
+- [Docker][]
 - Ruby 2.6 or later (to generate completions).
 
 ## `gen_completions.rb`
@@ -51,7 +53,7 @@ simplify the generation process further so that the completions are more
 readily updated in place, and that commands that themselves have subcommands
 can be handled.
 
-It has been tested with Ruby 2.6.
+It has been tested with Ruby 2.7.
 
 ### Usage / Updating
 
@@ -81,3 +83,4 @@ make docker-compose
 [lewisacidic/fish-docker]: https://github.com/lewisacidic/fish-docker
 [docker.fish]: https://github.com/docker/cli/blob/master/contrib/completion/fish/docker.fish
 [docker-compose.fish]: https://github.com/docker/compose/blob/master/contrib/completion/fish/docker-compose.fish
+[version]: https://img.shields.io/github/tag/halostatue/fish-brew.svg?label=Version

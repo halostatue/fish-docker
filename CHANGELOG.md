@@ -17,7 +17,7 @@
 
 - Updated `gen_completion.rb` to include `management commands` for Docker.
 - Use `--force-files` when completing `file`, `PATH`, `FILE`, or `DEST_PATH`
-  arguments. This should resolve [#2].
+  arguments. This should resolve [#2][].
 - Improve container printing for `docker cp` so that it _should_ append a
   colon to every container name for completion.
 - Completions regenerated for Docker version 20.10.0, build 7287ab3. The
@@ -46,7 +46,7 @@
 
 ## 1.1 / 2020-01-10
 
-- Fixes and an update provided by James Roeder (@jmaroeder) as [#1]. Thanks
+- Fixes and an update provided by James Roeder (@jmaroeder) as [#1][]. Thanks
   for the contribution!
 
 ## 1.0 / 2019-12-31
