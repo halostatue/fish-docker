@@ -272,8 +272,8 @@ class Switch
   def initialize(shorts, longs, description, metavar, docker)
     @completion = Completion.new(description: description, docker: docker)
 
-    shorts.each do |short| @completion.short(short) end
-    longs.each do |long| @completion.long(long) end
+    shorts.each { |short| @completion.short(short) }
+    longs.each { |long| @completion.long(long) }
 
     metavar = Array(metavar).compact
 
