@@ -105,7 +105,7 @@ class Completion
       when :subcommand
         args.map { |c| "__fish_seen_subcommand_from %{command}" % {command: c} }
       else
-        condition << args.empty? ? statement : "#{statement} #{args.join(' ')}"
+        condition << args.empty? ? statement : "#{statement} #{args.join(" ")}"
       end
 
     push(:@condition, args)
@@ -231,7 +231,7 @@ class Completion
   end
 
   def generate_cond
-    "--condition '#{@condition.join('; and')}'" unless @condition.empty?
+    "--condition '#{@condition.join("; and")}'" unless @condition.empty?
   end
 
   def generate_wraps
@@ -242,7 +242,7 @@ class Completion
     return if @arguments.empty?
 
     args = @arguments.map { |e|
-      e.kind_of?(Hash) ? "(#{e[:command]} #{Array(e[:args]).join(' ')})" : e
+      e.kind_of?(Hash) ? "(#{e[:command]} #{Array(e[:args]).join(" ")})" : e
     }.join("\n")
 
     "--arguments '#{args}'"
