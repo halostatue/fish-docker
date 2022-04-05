@@ -417,7 +417,7 @@ class DockerCmdLine
 
     raise "Can't find Usage in command #{command.inspect}" unless usage
 
-    args = usage.split(/\s+/)[3..-1].reject { |arg| arg.upcase == "[OPTIONS]" }
+    args = usage.split(/\s+/)[3..].reject { |arg| arg.upcase == "[OPTIONS]" }
 
     case command
     when "push", "pull"
