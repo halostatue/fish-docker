@@ -366,7 +366,7 @@ class DockerCmdLine
     return nil unless line.match?(/  /)
 
     opt, description = line.split(/  +/, 2)
-    switches = opt.split(/, /)
+    switches = opt.split(", ")
     metavar = nil
 
     # handle arguments with metavar
@@ -638,7 +638,7 @@ class Runner
   end
 
   def find_docker_path(binary)
-    docker_path = ENV["PATH"].split(/:/).find { |path|
+    docker_path = ENV["PATH"].split(":").find { |path|
       exe = File.join(path, binary)
       File.exist?(exe) || File.exist?("#{exe}.exe")
     }
