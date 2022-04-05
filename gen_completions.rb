@@ -103,7 +103,7 @@ class Completion
       when :no_subcommand
         NO_SUBCOMMAND_FUNCTION_NAME % (command || docker.binary).gsub("-", "_")
       when :subcommand
-        args.map { |c| "__fish_seen_subcommand_from %{command}" % { command: c } }
+        args.map { |c| "__fish_seen_subcommand_from %{command}" % {command: c} }
       else
         condition << args.empty? ? statement : "#{statement} #{args.join(' ')}"
       end
@@ -259,9 +259,9 @@ class Completion
   end
 
   def generate_options
-    @short_options.map { |o| "--short-option %{option}" % { option: o } } +
-      @long_options.map { |o| "--long-option %{option}" % { option: o } } +
-      @old_options.map { |o| "--old-option %{option}" % { option: o } }
+    @short_options.map { |o| "--short-option %{option}" % {option: o} } +
+      @long_options.map { |o| "--long-option %{option}" % {option: o} } +
+      @old_options.map { |o| "--old-option %{option}" % {option: o} }
   end
 end
 
