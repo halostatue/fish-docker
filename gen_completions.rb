@@ -7,7 +7,7 @@ require "set"
 require "shellwords"
 
 def log(message)
-  $stderr.puts message
+  warn message
 end
 
 NO_SUBCOMMAND_FUNCTION_NAME = "_halostatue_fish_%s_no_subcommand"
