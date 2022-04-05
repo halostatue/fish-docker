@@ -2,15 +2,15 @@
 # frozen_string_literal: true
 
 # require 'byebug'
-require 'pathname'
-require 'set'
-require 'shellwords'
+require "pathname"
+require "set"
+require "shellwords"
 
 def log(message)
   $stderr.puts message
 end
 
-NO_SUBCOMMAND_FUNCTION_NAME = '_halostatue_fish_%s_no_subcommand'
+NO_SUBCOMMAND_FUNCTION_NAME = "_halostatue_fish_%s_no_subcommand"
 
 # A class to help with subcommand definition.
 class Subcommand
@@ -56,7 +56,7 @@ class Subcommand
     args.each do |arg|
       m = /\[(.+)\.\.\.\]/.match(arg)
       arg = m[1] if m
-      uniq.merge(arg.split('|'))
+      uniq.merge(arg.split("|"))
     end
 
     uniq.map { |arg| arg_builder.call(self, arg) }.compact
@@ -101,9 +101,9 @@ class Completion
     args =
       case statement
       when :no_subcommand
-        NO_SUBCOMMAND_FUNCTION_NAME % (command || docker.binary).gsub('-', '_')
+        NO_SUBCOMMAND_FUNCTION_NAME % (command || docker.binary).gsub("-", "_")
       when :subcommand
-        args.map { |c| '__fish_seen_subcommand_from %{command}' % { command: c } }
+        args.map { |c| "__fish_seen_subcommand_from %{command}" % { command: c } }
       else
         condition << args.empty? ? statement : "#{statement} #{args.join(' ')}"
       end
@@ -167,7 +167,7 @@ class Completion
   # following parameter ('-w 32') or by appending the option with the value
   # ('-w32').
   def short(value)
-    push(:@short_options, value.sub(/^-+/, ''))
+    push(:@short_options, value.sub(/^-+/, ""))
   end
 
   # -l LONG_OPTION or --long-option=LONG_OPTION adds a GNU style long option to
@@ -181,7 +181,7 @@ class Completion
   # abbreviated so long as the abbreviation is unique ('--h') is equivalent to
   # '--help' if help is the only long option beginning with an 'h').
   def long(value)
-    push(:@long_options, value.sub(/^-+/, ''))
+    push(:@long_options, value.sub(/^-+/, ""))
   end
 
   # -o LONG_OPTION or --old-option=LONG_OPTION adds an old style long option to
@@ -192,7 +192,7 @@ class Completion
   # grouped together. Option arguments are specified in the following parameter
   # ('-ao null').
   def old(value)
-    push(:@old_options, value.sub(/^-+/, ''))
+    push(:@old_options, value.sub(/^-+/, ""))
   end
 
   def generate(command = nil)
@@ -203,7 +203,7 @@ class Completion
       generate_args,
       *generate_flags,
       *generate_options
-    ].compact.join(' ')
+    ].compact.join(" ")
   end
 
   private
@@ -226,7 +226,7 @@ class Completion
 
   def generate_base(command)
     %W(complete --command #{command || @command}).tap { |base|
-      base.push('--description', @description.gsub(Regexp.escape(ENV['HOME']), '~').inspect) if @description
+      base.push("--description", @description.gsub(Regexp.escape(ENV["HOME"]), "~").inspect) if @description
     }
   end
 
@@ -250,18 +250,18 @@ class Completion
 
   def generate_flags
     [].tap { |flags|
-      flags << '--keep-order' if @keep
-      flags << '--no-files' if @no_files
-      flags << '--force-files' if @force_files
-      flags << '--require-parameter' if @required
-      flags << '--exclusive' if @exclusive
+      flags << "--keep-order" if @keep
+      flags << "--no-files" if @no_files
+      flags << "--force-files" if @force_files
+      flags << "--require-parameter" if @required
+      flags << "--exclusive" if @exclusive
     }
   end
 
   def generate_options
-    @short_options.map { |o| '--short-option %{option}' % { option: o } } +
-      @long_options.map { |o| '--long-option %{option}' % { option: o } } +
-      @old_options.map { |o| '--old-option %{option}' % { option: o } }
+    @short_options.map { |o| "--short-option %{option}" % { option: o } } +
+      @long_options.map { |o| "--long-option %{option}" % { option: o } } +
+      @old_options.map { |o| "--old-option %{option}" % { option: o } }
   end
 end
 
@@ -296,13 +296,13 @@ class DockerCmdLine
   attr_reader :docker_path, :parts
 
   def binary
-    'docker'
+    "docker"
   end
 
   def initialize(path)
     @docker_path = path
     log("Building parts for #{binary}")
-    @parts = build_parts(output('help'))
+    @parts = build_parts(output("help"))
   end
 
   def common_options
@@ -335,7 +335,7 @@ class DockerCmdLine
 
     lines.each do |line|
       if line =~ /usage:(.+)$/i
-        parts['usage'] << Regexp.last_match(1)
+        parts["usage"] << Regexp.last_match(1)
       elsif line =~ /(.*):$/
         part = Regexp.last_match(1).downcase
       elsif line =~ /^$/
@@ -358,7 +358,7 @@ class DockerCmdLine
   end
 
   def parse_switches(parts)
-    parts['options'].map { |line| parse_switch(line) }.compact
+    parts["options"].map { |line| parse_switch(line) }.compact
   end
 
   def parse_switch(line)
@@ -374,17 +374,17 @@ class DockerCmdLine
     # -f, --file FILE
 
     switches.each_with_index do |switch, i|
-      next unless switch.match?(' ')
+      next unless switch.match?(" ")
 
-      opt, metavar = switch.split(' ', 2)
+      opt, metavar = switch.split(" ", 2)
 
       # Handle incorrectly specified PATHs
       metavar =
         case opt
-        when '--tlscacert', '--tlscert', '--tlskey'
-          'FILE'
-        when '--config'
-          'PATH'
+        when "--tlscacert", "--tlscert", "--tlskey"
+          "FILE"
+        when "--config"
+          "PATH"
         else
           metavar
         end
@@ -392,8 +392,8 @@ class DockerCmdLine
       switches[i] = opt
     end
 
-    shorts = switches.reject { |e| e.start_with?('--') }.map { |e| e.sub(/^-+/, '') }
-    longs = switches.filter { |e| e.start_with?('--') }.map { |e| e.sub(/^-+/, '') }
+    shorts = switches.reject { |e| e.start_with?("--") }.map { |e| e.sub(/^-+/, "") }
+    longs = switches.filter { |e| e.start_with?("--") }.map { |e| e.sub(/^-+/, "") }
 
     Switch.new(shorts, longs, description, metavar, self)
   end
@@ -403,26 +403,26 @@ class DockerCmdLine
   end
 
   def parse_subcommand(line)
-    return unless line.start_with?('  ')
+    return unless line.start_with?("  ")
 
     build_subcommand(*line.strip.split(/\s+/, 2))
   end
 
   def build_subcommand(command, description)
     log("Building #{binary} #{command}")
-    command.gsub!(/\*$/, '')
-    lines = output('help', command)
+    command.gsub!(/\*$/, "")
+    lines = output("help", command)
     parts = build_parts(lines)
-    usage = parts['usage']&.first&.gsub(/ \| /, '|')
+    usage = parts["usage"]&.first&.gsub(/ \| /, "|")
 
     raise "Can't find Usage in command #{command.inspect}" unless usage
 
-    args = usage.split(/\s+/)[3..-1].reject { |arg| arg.upcase == '[OPTIONS]' }
+    args = usage.split(/\s+/)[3..-1].reject { |arg| arg.upcase == "[OPTIONS]" }
 
     case command
-    when 'push', 'pull'
+    when "push", "pull"
       args = %w(REPOSITORY|IMAGE)
-    when 'images'
+    when "images"
       args = %w(REPOSITORY)
     end
 
@@ -441,7 +441,7 @@ end
 # Operating the command-line for `docker-compose`.
 class DockerComposeCmdLine < DockerCmdLine
   def binary
-    'docker-compose'
+    "docker-compose"
   end
 
   def subcommand_groups
@@ -481,8 +481,8 @@ class BaseFishGenerator
 
   def function(commands)
     FUNCTION % {
-      function: NO_SUBCOMMAND_FUNCTION_NAME % docker.binary.gsub('-', '_'),
-      commands: commands.join(' ')
+      function: NO_SUBCOMMAND_FUNCTION_NAME % docker.binary.gsub("-", "_"),
+      commands: commands.join(" ")
     }
   end
 
@@ -506,7 +506,7 @@ class BaseFishGenerator
     }
 
     [
-      '# common options',
+      "# common options",
       *switches,
       "\n"
     ]
@@ -514,7 +514,7 @@ class BaseFishGenerator
 
   def subcommands
     [
-      '# subcommands',
+      "# subcommands",
       *docker.subcommands.flat_map { |sub| sub.generate(docker, method(:process_subcommand_arg)) },
       "\n"
     ]
@@ -545,39 +545,39 @@ class DockerFishGenerator < BaseFishGenerator
       completion.cond(:subcommand, sub.command)
 
       case arg
-      when 'CONTAINER', '[CONTAINER...]'
+      when "CONTAINER", "[CONTAINER...]"
         select =
           case sub.command
-          when 'start', 'rm'
-            'stopped'
-          when 'commit', 'diff', 'export', 'inspect', 'cp'
-            'all'
+          when "start", "rm"
+            "stopped"
+          when "commit", "diff", "export", "inspect", "cp"
+            "all"
           else
-            'running'
+            "running"
           end
 
-        completion.arg(command: '_halostatue_fish_docker_print_containers', args: select)
-        completion.description('Container')
+        completion.arg(command: "_halostatue_fish_docker_print_containers", args: select)
+        completion.description("Container")
         completion.exclusive
-      when 'CONTAINER:SRC_PATH'
-        completion.arg(command: '_halostatue_fish_docker_print_containers', args: 'all :')
+      when "CONTAINER:SRC_PATH"
+        completion.arg(command: "_halostatue_fish_docker_print_containers", args: "all :")
         completion.description(arg)
         completion.exclusive
-      when 'IMAGE', 'SOURCE_IMAGE', 'TARGET_IMAGE'
-        completion.arg(command: '_halostatue_fish_docker_print_images')
-        completion.description('Image')
+      when "IMAGE", "SOURCE_IMAGE", "TARGET_IMAGE"
+        completion.arg(command: "_halostatue_fish_docker_print_images")
+        completion.description("Image")
         completion.exclusive
-      when 'REPOSITORY', '[REPOSITORY[:TAG]]'
-        completion.arg(command: '_halostatue_fish_docker_print_repositories')
-        completion.description('Repository')
+      when "REPOSITORY", "[REPOSITORY[:TAG]]"
+        completion.arg(command: "_halostatue_fish_docker_print_repositories")
+        completion.description("Repository")
         completion.exclusive
-      when 'PATH', 'FILE', 'DEST_PATH', 'file'
+      when "PATH", "FILE", "DEST_PATH", "file"
         completion.description(arg)
         completion.required
         completion.force_files
-      when '-'
-        completion.arg('-')
-        completion.description('STDIN')
+      when "-"
+        completion.arg("-")
+        completion.description("STDIN")
         completion.exclusive
       else
         completion.description(arg)
@@ -605,8 +605,8 @@ class DockerComposeFishGenerator < BaseFishGenerator
       completion.cond(:subcommand, sub.command)
       completion.no_files
 
-      completion.arg(command: '_halostatue_fish_docker_print_compose_services')
-      completion.description('Service')
+      completion.arg(command: "_halostatue_fish_docker_print_compose_services")
+      completion.description("Service")
     }
   end
 end
@@ -638,7 +638,7 @@ class Runner
   end
 
   def find_docker_path(binary)
-    docker_path = ENV['PATH'].split(/:/).find { |path|
+    docker_path = ENV["PATH"].split(/:/).find { |path|
       exe = File.join(path, binary)
       File.exist?(exe) || File.exist?("#{exe}.exe")
     }
@@ -649,7 +649,7 @@ class Runner
   end
 
   def generator_for(binary)
-    if binary == 'docker'
+    if binary == "docker"
       DockerFishGenerator.new(DockerCmdLine.new(@docker_path))
     else
       DockerComposeFishGenerator.new(DockerComposeCmdLine.new(@docker_path))
