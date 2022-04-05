@@ -338,7 +338,7 @@ class DockerCmdLine
         parts["usage"] << Regexp.last_match(1)
       elsif line =~ /(.*):$/
         part = Regexp.last_match(1).downcase
-      elsif line =~ /^$/
+      elsif /^$/.match?(line)
         part = nil
       elsif part
         parts[part] << line
