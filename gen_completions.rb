@@ -242,7 +242,7 @@ class Completion
     return if @arguments.empty?
 
     args = @arguments.map { |e|
-      e.kind_of?(Hash) ? "(#{e[:command]} #{Array(e[:args]).join(" ")})" : e
+      e.is_a?(Hash) ? "(#{e[:command]} #{Array(e[:args]).join(" ")})" : e
     }.join("\n")
 
     "--arguments '#{args}'"
