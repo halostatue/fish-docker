@@ -1,6 +1,6 @@
 # halostatue/fish-docker
 
-[![Version][]](https://github.com/halostatue/fish-brew/releases)
+[![Version][]](https://github.com/halostatue/fish-docker/releases)
 
 Completions for [Docker][] in the [fish shell][], based on
 [docker-fish-completion][].
@@ -73,7 +73,17 @@ make docker-compose
 
 ## Licence
 
-[MIT](LICENCE.md)
+[MIT](./LICENCE.md)
+
+## Change Log
+
+[CHANGELOG](./CHANGELOG.md)
+
+## Contributing
+
+- [Contributing](./CONTRIBUTING.md)
+- [Contributors](./CONTRIBUTORS.md)
+- [Code of Conduct](./CODE_OF_CONDUCT.md)
 
 [docker]: https://www.docker.com
 [fish shell]: https://fishshell.com 'friendly interactive shell'
@@ -83,4 +93,4 @@ make docker-compose
 [lewisacidic/fish-docker]: https://github.com/lewisacidic/fish-docker
 [docker.fish]: https://github.com/docker/cli/blob/master/contrib/completion/fish/docker.fish
 [docker-compose.fish]: https://github.com/docker/compose/blob/master/contrib/completion/fish/docker-compose.fish
-[version]: https://img.shields.io/github/tag/halostatue/fish-brew.svg?label=Version
+[version]: https://img.shields.io/github/tag/halostatue/fish-docker.svg?label=Version
