@@ -101,7 +101,7 @@ class Completion
     args =
       case statement
       when :no_subcommand
-        NO_SUBCOMMAND_FUNCTION_NAME % (command || docker.binary).gsub("-", "_")
+        NO_SUBCOMMAND_FUNCTION_NAME % (command || docker.binary).tr("-", "_")
       when :subcommand
         args.map { |c| "__fish_seen_subcommand_from %{command}" % {command: c} }
       else
@@ -481,7 +481,7 @@ class BaseFishGenerator
 
   def function(commands)
     FUNCTION % {
-      function: NO_SUBCOMMAND_FUNCTION_NAME % docker.binary.gsub("-", "_"),
+      function: NO_SUBCOMMAND_FUNCTION_NAME % docker.binary.tr("-", "_"),
       commands: commands.join(" ")
     }
   end
