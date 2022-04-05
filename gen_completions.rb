@@ -225,7 +225,7 @@ class Completion
   end
 
   def generate_base(command)
-    %W(complete --command #{command || @command}).tap { |base|
+    %W[complete --command #{command || @command}].tap { |base|
       base.push("--description", @description.gsub(Regexp.escape(ENV["HOME"]), "~").inspect) if @description
     }
   end
@@ -235,7 +235,7 @@ class Completion
   end
 
   def generate_wraps
-    @wraps.map { |wrap| %W(--wraps #{wrap}) } unless @wraps.empty?
+    @wraps.map { |wrap| %W[--wraps #{wrap}] } unless @wraps.empty?
   end
 
   def generate_args
@@ -326,7 +326,7 @@ class DockerCmdLine
   private
 
   def subcommand_groups
-    %w(commands management\ commands)
+    %w[commands management\ commands]
   end
 
   def build_parts(lines)
@@ -421,9 +421,9 @@ class DockerCmdLine
 
     case command
     when "push", "pull"
-      args = %w(REPOSITORY|IMAGE)
+      args = %w[REPOSITORY|IMAGE]
     when "images"
-      args = %w(REPOSITORY)
+      args = %w[REPOSITORY]
     end
 
     switches = parse_switches(parts)
@@ -445,7 +445,7 @@ class DockerComposeCmdLine < DockerCmdLine
   end
 
   def subcommand_groups
-    %w(commands)
+    %w[commands]
   end
 end
 
@@ -632,7 +632,7 @@ class Runner
   private
 
   def validate(binary)
-    raise "Unknown binary #{binary.inspect}" unless %w(docker docker-compose).include?(binary)
+    raise "Unknown binary #{binary.inspect}" unless %w[docker docker-compose].include?(binary)
 
     @binary = binary
   end
