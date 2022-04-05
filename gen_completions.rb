@@ -354,7 +354,7 @@ class DockerCmdLine
     # docker returns non-zero exit code for some help commands so can't use
     # subprocess.check_output here
 
-    %x(#{cmd.shelljoin} 2>&1).split($/)
+    `#{cmd.shelljoin} 2>&1`.split($/)
   end
 
   def parse_switches(parts)
