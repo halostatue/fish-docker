@@ -16,14 +16,14 @@ complete -e -c docker
 
 function _halostatue_fish_docker_no_subcommand
     for i in (commandline -opc)
-        contains -- $i attach build builder buildx commit compose config container context cp create diff events exec export history image images import info inspect kill load login logout logs manifest network node pause plugin port ps pull push rename restart rm rmi run save scan search secret service stack start stats stop swarm system tag top trust unpause update version volume wait; and return 1
+        contains -- $i attach build builder commit config container context cp create diff events exec export history image images import info inspect kill load login logout logs manifest network node pause plugin port ps pull push rename restart rm rmi run save search secret service stack start stats stop swarm system tag top trust unpause update version volume wait; and return 1
     end
     return 0
 end
 
 # common options
 complete --command docker --description "Location of client config files (default \"~/.docker\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option config
-complete --command docker --description "Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var and" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option c --long-option context
+complete --command docker --description "Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option c --long-option context
 complete --command docker --description "Enable debug mode" --condition '_halostatue_fish_docker_no_subcommand' --short-option D --long-option debug
 complete --command docker --description "Daemon socket(s) to connect to" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option H --long-option host
 complete --command docker --description "Set the logging level (\"debug\"|\"info\"|\"warn\"|\"error\"|\"fatal\") (default \"info\")" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option l --long-option log-level
@@ -57,7 +57,7 @@ complete --command docker --description "Set the networking mode for the RUN ins
 complete --command docker --description "Do not use cache when building the image" --condition '__fish_seen_subcommand_from build' --long-option no-cache
 complete --command docker --description "Output destination (format: type=local,dest=path)" --condition '__fish_seen_subcommand_from build' --exclusive --short-option o --long-option output
 complete --command docker --description "Set platform if server is multi-platform capable" --condition '__fish_seen_subcommand_from build' --exclusive --long-option platform
-complete --command docker --description "Set type of progress output (auto, plain, tty). Use plain to show container output" --condition '__fish_seen_subcommand_from build' --exclusive --long-option progress
+complete --command docker --description "Set type of progress output (auto, plain, tty). Use plain to show container" --condition '__fish_seen_subcommand_from build' --exclusive --long-option progress
 complete --command docker --description "Always attempt to pull a newer version of the image" --condition '__fish_seen_subcommand_from build' --long-option pull
 complete --command docker --description "Suppress the build output and print image ID on success" --condition '__fish_seen_subcommand_from build' --short-option q --long-option quiet
 complete --command docker --description "PATH" --condition '__fish_seen_subcommand_from build' --force-files --require-parameter
@@ -122,7 +122,7 @@ complete --command docker --description "Add additional groups to join" --condit
 complete --command docker --description "Command to run to check health" --condition '__fish_seen_subcommand_from create' --exclusive --long-option health-cmd
 complete --command docker --description "Time between running the check (ms|s|m|h) (default 0s)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option health-interval
 complete --command docker --description "Consecutive failures needed to report unhealthy" --condition '__fish_seen_subcommand_from create' --exclusive --long-option health-retries
-complete --command docker --description "Start period for the container to initialize before starting health-retries" --condition '__fish_seen_subcommand_from create' --exclusive --long-option health-start-period
+complete --command docker --description "Start period for the container to initialize before starting" --condition '__fish_seen_subcommand_from create' --exclusive --long-option health-start-period
 complete --command docker --description "Maximum time to allow one check to run (ms|s|m|h) (default 0s)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option health-timeout
 complete --command docker --description "Print usage" --condition '__fish_seen_subcommand_from create' --long-option help
 complete --command docker --description "Container host name" --condition '__fish_seen_subcommand_from create' --exclusive --short-option h --long-option hostname
@@ -281,7 +281,7 @@ complete --command docker --description "Follow log output" --condition '__fish_
 complete --command docker --description "Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)" --condition '__fish_seen_subcommand_from logs' --exclusive --long-option since
 complete --command docker --description "Number of lines to show from the end of the logs (default \"all\")" --condition '__fish_seen_subcommand_from logs' --exclusive --short-option n --long-option tail
 complete --command docker --description "Show timestamps" --condition '__fish_seen_subcommand_from logs' --short-option t --long-option timestamps
-complete --command docker --description "Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)" --condition '__fish_seen_subcommand_from logs' --exclusive --long-option until
+complete --command docker --description "Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42" --condition '__fish_seen_subcommand_from logs' --exclusive --long-option until
 complete --command docker --description "Container" --condition '__fish_seen_subcommand_from logs' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 
 # pause
@@ -387,7 +387,7 @@ complete --command docker --description "Add additional groups to join" --condit
 complete --command docker --description "Command to run to check health" --condition '__fish_seen_subcommand_from run' --exclusive --long-option health-cmd
 complete --command docker --description "Time between running the check (ms|s|m|h) (default 0s)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option health-interval
 complete --command docker --description "Consecutive failures needed to report unhealthy" --condition '__fish_seen_subcommand_from run' --exclusive --long-option health-retries
-complete --command docker --description "Start period for the container to initialize before starting health-retries" --condition '__fish_seen_subcommand_from run' --exclusive --long-option health-start-period
+complete --command docker --description "Start period for the container to initialize before starting" --condition '__fish_seen_subcommand_from run' --exclusive --long-option health-start-period
 complete --command docker --description "Maximum time to allow one check to run (ms|s|m|h) (default 0s)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option health-timeout
 complete --command docker --description "Print usage" --condition '__fish_seen_subcommand_from run' --long-option help
 complete --command docker --description "Container host name" --condition '__fish_seen_subcommand_from run' --exclusive --short-option h --long-option hostname
@@ -528,22 +528,6 @@ complete --command docker --description "Container" --condition '__fish_seen_sub
 complete --command docker --description "Manage builds" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'builder'
 complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from builder' --exclusive
 
-# buildx
-complete --command docker --description "Docker Buildx (Docker Inc., v0.7.1)" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'buildx'
-complete --command docker --description "Override the configured builder instance" --condition '__fish_seen_subcommand_from buildx' --exclusive --long-option builder
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from buildx' --exclusive
-
-# compose
-complete --command docker --description "Docker Compose (Docker Inc., v2.2.3)" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'compose'
-complete --command docker --description "Control when to print ANSI control characters (\"never\"|\"always\"|\"auto\") (default" --condition '__fish_seen_subcommand_from compose' --exclusive --long-option ansi
-complete --command docker --description "Run compose in backward compatibility mode" --condition '__fish_seen_subcommand_from compose' --long-option compatibility
-complete --command docker --description "Specify an alternate environment file." --condition '__fish_seen_subcommand_from compose' --exclusive --long-option env-file
-complete --command docker --description "Compose configuration files" --condition '__fish_seen_subcommand_from compose' --exclusive --short-option f --long-option file
-complete --command docker --description "Specify a profile to enable" --condition '__fish_seen_subcommand_from compose' --exclusive --long-option profile
-complete --command docker --description "Specify an alternate working directory" --condition '__fish_seen_subcommand_from compose' --exclusive --long-option project-directory
-complete --command docker --description "Project name" --condition '__fish_seen_subcommand_from compose' --exclusive --short-option p --long-option project-name
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from compose' --exclusive
-
 # config
 complete --command docker --description "Manage Docker configs" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'config'
 complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from config' --exclusive
@@ -575,21 +559,6 @@ complete --command docker --description "COMMAND" --condition '__fish_seen_subco
 # plugin
 complete --command docker --description "Manage plugins" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'plugin'
 complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from plugin' --exclusive
-
-# scan
-complete --command docker --description "Docker Scan (Docker Inc., v0.16.0)" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'scan'
-complete --command docker --description "Accept using a third party scanning provider" --condition '__fish_seen_subcommand_from scan' --long-option accept-license
-complete --command docker --description "Show dependency tree with scan results" --condition '__fish_seen_subcommand_from scan' --long-option dependency-tree
-complete --command docker --description "Exclude base image from vulnerability scanning (requires --file)" --condition '__fish_seen_subcommand_from scan' --long-option exclude-base
-complete --command docker --description "Dockerfile associated with image, provides more detailed results" --condition '__fish_seen_subcommand_from scan' --exclusive --short-option f --long-option file
-complete --command docker --description "Aggregate duplicated vulnerabilities and group them to a single one (requires --json)" --condition '__fish_seen_subcommand_from scan' --long-option group-issues
-complete --command docker --description "Output results in JSON format" --condition '__fish_seen_subcommand_from scan' --long-option json
-complete --command docker --description "Authenticate to the scan provider using an optional token (with --token), or web base token" --condition '__fish_seen_subcommand_from scan' --long-option login
-complete --command docker --description "Reject using a third party scanning provider" --condition '__fish_seen_subcommand_from scan' --long-option reject-license
-complete --command docker --description "Only report vulnerabilities of provided level or higher (low|medium|high)" --condition '__fish_seen_subcommand_from scan' --exclusive --long-option severity
-complete --command docker --description "Authentication token to login to the third party scanning provider" --condition '__fish_seen_subcommand_from scan' --exclusive --long-option token
-complete --command docker --description "Display version of the scan plugin" --condition '__fish_seen_subcommand_from scan' --long-option version
-complete --command docker --description "Image" --condition '__fish_seen_subcommand_from scan' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
 
 # secret
 complete --command docker --description "Manage Docker secrets" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'secret'

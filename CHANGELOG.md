@@ -1,5 +1,14 @@
 # fish-docker Changelog
 
+## 1.8 / 2022-05-16
+
+- Completion regenerated for Docker version 20.10.15, build fd82621d35 and
+  Docker Compose version 2.5.0. Note that this version of the files have been
+  generated with separate installations of `docker` and `docker-compose` through
+  Homebrew and not through Docker Desktop.
+
+- Converted the Ruby script to standardrb format
+
 ## 1.7 / 2022-04-01
 
 - Completion regenerated for Docker 20.10.12, build e91ed57 and docker-compose
