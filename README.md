@@ -25,7 +25,7 @@ Completions for [Docker][] in the [fish shell][], based on
 Install with [Fisher][] (recommended):
 
 ```fish
-fisher install halostatue/fish-docker@1.x
+fisher install halostatue/fish-docker@v1.x
 ```
 
 <details>
