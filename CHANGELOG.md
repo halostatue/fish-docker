@@ -1,5 +1,13 @@
 # fish-docker Changelog
 
+## 1.9 / 2022-06-26
+
+- Completion regenerated for Docker version 20.10.17, build 100c70180f and
+  Docker Compose version 2.6.0.
+
+- Fixes for the README provided by Petri Kivikangas (@Kitanotori]) as [#3][].
+  Thanks for the contribution!
+
 ## 1.8 / 2022-05-16
 
 - Completion regenerated for Docker version 20.10.15, build fd82621d35 and
@@ -65,3 +73,4 @@
 [docker-fish-completion]: https://github.com/barnybug-archive/docker-fish-completion
 [#1]: https://github.com/halostatue/fish-docker/pull/1
 [#2]: https://github.com/halostatue/fish-docker/issues/2
+[#3]: https://github.com/halostatue/fish-docker/pull/3

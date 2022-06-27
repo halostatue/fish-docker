@@ -16,35 +16,35 @@ complete -e -c docker
 
 function _halostatue_fish_docker_no_subcommand
     for i in (commandline -opc)
-        contains -- $i attach build builder commit config container context cp create diff events exec export history image images import info inspect kill load login logout logs manifest network node pause plugin port ps pull push rename restart rm rmi run save search secret service stack start stats stop swarm system tag top trust unpause update version volume wait; and return 1
+        contains -- $i attach build builder commit compose config container context cp create diff events exec export history image images import info inspect kill load login logout logs manifest network node pause plugin port ps pull push rename restart rm rmi run save search secret service stack start stats stop swarm system tag top trust unpause update version volume wait; and return 1
     end
     return 0
 end
 
 # common options
-complete --command docker --description "Location of client config files (default \"~/.docker\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option config
-complete --command docker --description "Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option c --long-option context
-complete --command docker --description "Enable debug mode" --condition '_halostatue_fish_docker_no_subcommand' --short-option D --long-option debug
-complete --command docker --description "Daemon socket(s) to connect to" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option H --long-option host
-complete --command docker --description "Set the logging level (\"debug\"|\"info\"|\"warn\"|\"error\"|\"fatal\") (default \"info\")" --condition '_halostatue_fish_docker_no_subcommand' --exclusive --short-option l --long-option log-level
-complete --command docker --description "Use TLS; implied by --tlsverify" --condition '_halostatue_fish_docker_no_subcommand' --long-option tls
-complete --command docker --description "Trust certs signed only by this CA (default \"~/.docker/ca.pem\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option tlscacert
-complete --command docker --description "Path to TLS certificate file (default \"~/.docker/cert.pem\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option tlscert
-complete --command docker --description "Path to TLS key file (default \"~/.docker/key.pem\")" --condition '_halostatue_fish_docker_no_subcommand' --require-parameter --long-option tlskey
-complete --command docker --description "Use TLS and verify the remote" --condition '_halostatue_fish_docker_no_subcommand' --long-option tlsverify
-complete --command docker --description "Print version information and quit" --condition '_halostatue_fish_docker_no_subcommand' --short-option v --long-option version
+complete --command docker --description "Location of client config files (default \"~/.docker\")" --condition _halostatue_fish_docker_no_subcommand --require-parameter --long-option config
+complete --command docker --description "Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var" --condition _halostatue_fish_docker_no_subcommand --exclusive --short-option c --long-option context
+complete --command docker --description "Enable debug mode" --condition _halostatue_fish_docker_no_subcommand --short-option D --long-option debug
+complete --command docker --description "Daemon socket(s) to connect to" --condition _halostatue_fish_docker_no_subcommand --exclusive --short-option H --long-option host
+complete --command docker --description "Set the logging level (\"debug\"|\"info\"|\"warn\"|\"error\"|\"fatal\") (default \"info\")" --condition _halostatue_fish_docker_no_subcommand --exclusive --short-option l --long-option log-level
+complete --command docker --description "Use TLS; implied by --tlsverify" --condition _halostatue_fish_docker_no_subcommand --long-option tls
+complete --command docker --description "Trust certs signed only by this CA (default \"~/.docker/ca.pem\")" --condition _halostatue_fish_docker_no_subcommand --require-parameter --long-option tlscacert
+complete --command docker --description "Path to TLS certificate file (default \"~/.docker/cert.pem\")" --condition _halostatue_fish_docker_no_subcommand --require-parameter --long-option tlscert
+complete --command docker --description "Path to TLS key file (default \"~/.docker/key.pem\")" --condition _halostatue_fish_docker_no_subcommand --require-parameter --long-option tlskey
+complete --command docker --description "Use TLS and verify the remote" --condition _halostatue_fish_docker_no_subcommand --long-option tlsverify
+complete --command docker --description "Print version information and quit" --condition _halostatue_fish_docker_no_subcommand --short-option v --long-option version
 
 
 # subcommands
 # attach
-complete --command docker --description "Attach local standard input, output, and error streams to a running container" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'attach'
+complete --command docker --description "Attach local standard input, output, and error streams to a running container" --condition _halostatue_fish_docker_no_subcommand --arguments attach
 complete --command docker --description "Override the key sequence for detaching a container" --condition '__fish_seen_subcommand_from attach' --exclusive --long-option detach-keys
 complete --command docker --description "Do not attach STDIN" --condition '__fish_seen_subcommand_from attach' --long-option no-stdin
 complete --command docker --description "Proxy all received signals to the process (default true)" --condition '__fish_seen_subcommand_from attach' --long-option sig-proxy
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from attach' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description Container --condition '__fish_seen_subcommand_from attach' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 
 # build
-complete --command docker --description "Build an image from a Dockerfile" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'build'
+complete --command docker --description "Build an image from a Dockerfile" --condition _halostatue_fish_docker_no_subcommand --arguments build
 complete --command docker --description "Add a custom host-to-IP mapping (host:ip)" --condition '__fish_seen_subcommand_from build' --exclusive --long-option add-host
 complete --command docker --description "Set build-time variables" --condition '__fish_seen_subcommand_from build' --exclusive --long-option build-arg
 complete --command docker --description "Images to consider as cache sources" --condition '__fish_seen_subcommand_from build' --exclusive --long-option cache-from
@@ -60,29 +60,29 @@ complete --command docker --description "Set platform if server is multi-platfor
 complete --command docker --description "Set type of progress output (auto, plain, tty). Use plain to show container" --condition '__fish_seen_subcommand_from build' --exclusive --long-option progress
 complete --command docker --description "Always attempt to pull a newer version of the image" --condition '__fish_seen_subcommand_from build' --long-option pull
 complete --command docker --description "Suppress the build output and print image ID on success" --condition '__fish_seen_subcommand_from build' --short-option q --long-option quiet
-complete --command docker --description "PATH" --condition '__fish_seen_subcommand_from build' --force-files --require-parameter
-complete --command docker --description "URL" --condition '__fish_seen_subcommand_from build' --exclusive
-complete --command docker --description "STDIN" --condition '__fish_seen_subcommand_from build' --arguments '-' --exclusive
+complete --command docker --description PATH --condition '__fish_seen_subcommand_from build' --force-files --require-parameter
+complete --command docker --description URL --condition '__fish_seen_subcommand_from build' --exclusive
+complete --command docker --description STDIN --condition '__fish_seen_subcommand_from build' --arguments - --exclusive
 
 # commit
-complete --command docker --description "Create a new image from a container's changes" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'commit'
+complete --command docker --description "Create a new image from a container's changes" --condition _halostatue_fish_docker_no_subcommand --arguments commit
 complete --command docker --description "Author (e.g., \"John Hannibal Smith <hannibal@a-team.com>\")" --condition '__fish_seen_subcommand_from commit' --exclusive --short-option a --long-option author
 complete --command docker --description "Apply Dockerfile instruction to the created image" --condition '__fish_seen_subcommand_from commit' --exclusive --short-option c --long-option change
 complete --command docker --description "Commit message" --condition '__fish_seen_subcommand_from commit' --exclusive --short-option m --long-option message
 complete --command docker --description "Pause container during commit (default true)" --condition '__fish_seen_subcommand_from commit' --short-option p --long-option pause
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from commit' --arguments '(_halostatue_fish_docker_print_containers all)' --exclusive
-complete --command docker --description "Repository" --condition '__fish_seen_subcommand_from commit' --arguments '(_halostatue_fish_docker_print_repositories )' --exclusive
+complete --command docker --description Container --condition '__fish_seen_subcommand_from commit' --arguments '(_halostatue_fish_docker_print_containers all)' --exclusive
+complete --command docker --description Repository --condition '__fish_seen_subcommand_from commit' --arguments '(_halostatue_fish_docker_print_repositories )' --exclusive
 
 # cp
-complete --command docker --description "Copy files/folders between a container and the local filesystem" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'cp'
+complete --command docker --description "Copy files/folders between a container and the local filesystem" --condition _halostatue_fish_docker_no_subcommand --arguments cp
 complete --command docker --description "Archive mode (copy all uid/gid information)" --condition '__fish_seen_subcommand_from cp' --short-option a --long-option archive
 complete --command docker --description "Always follow symbol link in SRC_PATH" --condition '__fish_seen_subcommand_from cp' --short-option L --long-option follow-link
 complete --command docker --description "CONTAINER:SRC_PATH" --condition '__fish_seen_subcommand_from cp' --arguments '(_halostatue_fish_docker_print_containers all :)' --exclusive
-complete --command docker --description "DEST_PATH" --condition '__fish_seen_subcommand_from cp' --force-files --require-parameter
-complete --command docker --description "STDIN" --condition '__fish_seen_subcommand_from cp' --arguments '-' --exclusive
+complete --command docker --description DEST_PATH --condition '__fish_seen_subcommand_from cp' --force-files --require-parameter
+complete --command docker --description STDIN --condition '__fish_seen_subcommand_from cp' --arguments - --exclusive
 
 # create
-complete --command docker --description "Create a new container" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'create'
+complete --command docker --description "Create a new container" --condition _halostatue_fish_docker_no_subcommand --arguments create
 complete --command docker --description "Add a custom host-to-IP mapping (host:ip)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option add-host
 complete --command docker --description "Attach to STDIN, STDOUT or STDERR" --condition '__fish_seen_subcommand_from create' --exclusive --short-option a --long-option attach
 complete --command docker --description "Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option blkio-weight
@@ -178,23 +178,23 @@ complete --command docker --description "Bind mount a volume" --condition '__fis
 complete --command docker --description "Optional volume driver for the container" --condition '__fish_seen_subcommand_from create' --exclusive --long-option volume-driver
 complete --command docker --description "Mount volumes from the specified container(s)" --condition '__fish_seen_subcommand_from create' --exclusive --long-option volumes-from
 complete --command docker --description "Working directory inside the container" --condition '__fish_seen_subcommand_from create' --exclusive --short-option w --long-option workdir
-complete --command docker --description "Image" --condition '__fish_seen_subcommand_from create' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
+complete --command docker --description Image --condition '__fish_seen_subcommand_from create' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
 complete --command docker --description "[COMMAND]" --condition '__fish_seen_subcommand_from create' --exclusive
-complete --command docker --description "ARG" --condition '__fish_seen_subcommand_from create' --exclusive
+complete --command docker --description ARG --condition '__fish_seen_subcommand_from create' --exclusive
 
 # diff
-complete --command docker --description "Inspect changes to files or directories on a container's filesystem" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'diff'
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from diff' --arguments '(_halostatue_fish_docker_print_containers all)' --exclusive
+complete --command docker --description "Inspect changes to files or directories on a container's filesystem" --condition _halostatue_fish_docker_no_subcommand --arguments diff
+complete --command docker --description Container --condition '__fish_seen_subcommand_from diff' --arguments '(_halostatue_fish_docker_print_containers all)' --exclusive
 
 # events
-complete --command docker --description "Get real time events from the server" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'events'
+complete --command docker --description "Get real time events from the server" --condition _halostatue_fish_docker_no_subcommand --arguments events
 complete --command docker --description "Filter output based on conditions provided" --condition '__fish_seen_subcommand_from events' --exclusive --short-option f --long-option filter
 complete --command docker --description "Format the output using the given Go template" --condition '__fish_seen_subcommand_from events' --exclusive --long-option format
 complete --command docker --description "Show all events created since timestamp" --condition '__fish_seen_subcommand_from events' --exclusive --long-option since
 complete --command docker --description "Stream events until this timestamp" --condition '__fish_seen_subcommand_from events' --exclusive --long-option until
 
 # exec
-complete --command docker --description "Run a command in a running container" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'exec'
+complete --command docker --description "Run a command in a running container" --condition _halostatue_fish_docker_no_subcommand --arguments exec
 complete --command docker --description "Detached mode: run command in the background" --condition '__fish_seen_subcommand_from exec' --short-option d --long-option detach
 complete --command docker --description "Override the key sequence for detaching a container" --condition '__fish_seen_subcommand_from exec' --exclusive --long-option detach-keys
 complete --command docker --description "Set environment variables" --condition '__fish_seen_subcommand_from exec' --exclusive --short-option e --long-option env
@@ -204,97 +204,97 @@ complete --command docker --description "Give extended privileges to the command
 complete --command docker --description "Allocate a pseudo-TTY" --condition '__fish_seen_subcommand_from exec' --short-option t --long-option tty
 complete --command docker --description "Username or UID (format: <name|uid>[:<group|gid>])" --condition '__fish_seen_subcommand_from exec' --exclusive --short-option u --long-option user
 complete --command docker --description "Working directory inside the container" --condition '__fish_seen_subcommand_from exec' --exclusive --short-option w --long-option workdir
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from exec' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from exec' --exclusive
-complete --command docker --description "ARG" --condition '__fish_seen_subcommand_from exec' --exclusive
+complete --command docker --description Container --condition '__fish_seen_subcommand_from exec' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from exec' --exclusive
+complete --command docker --description ARG --condition '__fish_seen_subcommand_from exec' --exclusive
 
 # export
-complete --command docker --description "Export a container's filesystem as a tar archive" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'export'
+complete --command docker --description "Export a container's filesystem as a tar archive" --condition _halostatue_fish_docker_no_subcommand --arguments export
 complete --command docker --description "Write to a file, instead of STDOUT" --condition '__fish_seen_subcommand_from export' --exclusive --short-option o --long-option output
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from export' --arguments '(_halostatue_fish_docker_print_containers all)' --exclusive
+complete --command docker --description Container --condition '__fish_seen_subcommand_from export' --arguments '(_halostatue_fish_docker_print_containers all)' --exclusive
 
 # history
-complete --command docker --description "Show the history of an image" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'history'
+complete --command docker --description "Show the history of an image" --condition _halostatue_fish_docker_no_subcommand --arguments history
 complete --command docker --description "Pretty-print images using a Go template" --condition '__fish_seen_subcommand_from history' --exclusive --long-option format
 complete --command docker --description "Print sizes and dates in human readable format (default true)" --condition '__fish_seen_subcommand_from history' --short-option H --long-option human
 complete --command docker --description "Don't truncate output" --condition '__fish_seen_subcommand_from history' --long-option no-trunc
 complete --command docker --description "Only show image IDs" --condition '__fish_seen_subcommand_from history' --short-option q --long-option quiet
-complete --command docker --description "Image" --condition '__fish_seen_subcommand_from history' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
+complete --command docker --description Image --condition '__fish_seen_subcommand_from history' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
 
 # images
-complete --command docker --description "List images" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'images'
+complete --command docker --description "List images" --condition _halostatue_fish_docker_no_subcommand --arguments images
 complete --command docker --description "Show all images (default hides intermediate images)" --condition '__fish_seen_subcommand_from images' --short-option a --long-option all
 complete --command docker --description "Show digests" --condition '__fish_seen_subcommand_from images' --long-option digests
 complete --command docker --description "Filter output based on conditions provided" --condition '__fish_seen_subcommand_from images' --exclusive --short-option f --long-option filter
 complete --command docker --description "Pretty-print images using a Go template" --condition '__fish_seen_subcommand_from images' --exclusive --long-option format
 complete --command docker --description "Don't truncate output" --condition '__fish_seen_subcommand_from images' --long-option no-trunc
 complete --command docker --description "Only show image IDs" --condition '__fish_seen_subcommand_from images' --short-option q --long-option quiet
-complete --command docker --description "Repository" --condition '__fish_seen_subcommand_from images' --arguments '(_halostatue_fish_docker_print_repositories )' --exclusive
+complete --command docker --description Repository --condition '__fish_seen_subcommand_from images' --arguments '(_halostatue_fish_docker_print_repositories )' --exclusive
 
 # import
-complete --command docker --description "Import the contents from a tarball to create a filesystem image" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'import'
+complete --command docker --description "Import the contents from a tarball to create a filesystem image" --condition _halostatue_fish_docker_no_subcommand --arguments import
 complete --command docker --description "Apply Dockerfile instruction to the created image" --condition '__fish_seen_subcommand_from import' --exclusive --short-option c --long-option change
 complete --command docker --description "Set commit message for imported image" --condition '__fish_seen_subcommand_from import' --exclusive --short-option m --long-option message
 complete --command docker --description "Set platform if server is multi-platform capable" --condition '__fish_seen_subcommand_from import' --exclusive --long-option platform
-complete --command docker --description "file" --condition '__fish_seen_subcommand_from import' --force-files --require-parameter
-complete --command docker --description "URL" --condition '__fish_seen_subcommand_from import' --exclusive
-complete --command docker --description "STDIN" --condition '__fish_seen_subcommand_from import' --arguments '-' --exclusive
-complete --command docker --description "Repository" --condition '__fish_seen_subcommand_from import' --arguments '(_halostatue_fish_docker_print_repositories )' --exclusive
+complete --command docker --description file --condition '__fish_seen_subcommand_from import' --force-files --require-parameter
+complete --command docker --description URL --condition '__fish_seen_subcommand_from import' --exclusive
+complete --command docker --description STDIN --condition '__fish_seen_subcommand_from import' --arguments - --exclusive
+complete --command docker --description Repository --condition '__fish_seen_subcommand_from import' --arguments '(_halostatue_fish_docker_print_repositories )' --exclusive
 
 # info
-complete --command docker --description "Display system-wide information" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'info'
+complete --command docker --description "Display system-wide information" --condition _halostatue_fish_docker_no_subcommand --arguments info
 complete --command docker --description "Format the output using the given Go template" --condition '__fish_seen_subcommand_from info' --exclusive --short-option f --long-option format
 
 # inspect
-complete --command docker --description "Return low-level information on Docker objects" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'inspect'
+complete --command docker --description "Return low-level information on Docker objects" --condition _halostatue_fish_docker_no_subcommand --arguments inspect
 complete --command docker --description "Format the output using the given Go template" --condition '__fish_seen_subcommand_from inspect' --exclusive --short-option f --long-option format
 complete --command docker --description "Display total file sizes if the type is container" --condition '__fish_seen_subcommand_from inspect' --short-option s --long-option size
 complete --command docker --description "Return JSON for specified type" --condition '__fish_seen_subcommand_from inspect' --exclusive --long-option type
-complete --command docker --description "NAME" --condition '__fish_seen_subcommand_from inspect' --exclusive
-complete --command docker --description "ID" --condition '__fish_seen_subcommand_from inspect' --exclusive
+complete --command docker --description NAME --condition '__fish_seen_subcommand_from inspect' --exclusive
+complete --command docker --description ID --condition '__fish_seen_subcommand_from inspect' --exclusive
 
 # kill
-complete --command docker --description "Kill one or more running containers" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'kill'
+complete --command docker --description "Kill one or more running containers" --condition _halostatue_fish_docker_no_subcommand --arguments kill
 complete --command docker --description "Signal to send to the container (default \"KILL\")" --condition '__fish_seen_subcommand_from kill' --exclusive --short-option s --long-option signal
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from kill' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description Container --condition '__fish_seen_subcommand_from kill' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 
 # load
-complete --command docker --description "Load an image from a tar archive or STDIN" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'load'
+complete --command docker --description "Load an image from a tar archive or STDIN" --condition _halostatue_fish_docker_no_subcommand --arguments load
 complete --command docker --description "Read from tar archive file, instead of STDIN" --condition '__fish_seen_subcommand_from load' --exclusive --short-option i --long-option input
 complete --command docker --description "Suppress the load output" --condition '__fish_seen_subcommand_from load' --short-option q --long-option quiet
 
 # login
-complete --command docker --description "Log in to a Docker registry" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'login'
-complete --command docker --description "Password" --condition '__fish_seen_subcommand_from login' --exclusive --short-option p --long-option password
+complete --command docker --description "Log in to a Docker registry" --condition _halostatue_fish_docker_no_subcommand --arguments login
+complete --command docker --description Password --condition '__fish_seen_subcommand_from login' --exclusive --short-option p --long-option password
 complete --command docker --description "Take the password from stdin" --condition '__fish_seen_subcommand_from login' --long-option password-stdin
-complete --command docker --description "Username" --condition '__fish_seen_subcommand_from login' --exclusive --short-option u --long-option username
+complete --command docker --description Username --condition '__fish_seen_subcommand_from login' --exclusive --short-option u --long-option username
 complete --command docker --description "[SERVER]" --condition '__fish_seen_subcommand_from login' --exclusive
 
 # logout
-complete --command docker --description "Log out from a Docker registry" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'logout'
+complete --command docker --description "Log out from a Docker registry" --condition _halostatue_fish_docker_no_subcommand --arguments logout
 complete --command docker --description "[SERVER]" --condition '__fish_seen_subcommand_from logout' --exclusive
 
 # logs
-complete --command docker --description "Fetch the logs of a container" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'logs'
+complete --command docker --description "Fetch the logs of a container" --condition _halostatue_fish_docker_no_subcommand --arguments logs
 complete --command docker --description "Show extra details provided to logs" --condition '__fish_seen_subcommand_from logs' --long-option details
 complete --command docker --description "Follow log output" --condition '__fish_seen_subcommand_from logs' --short-option f --long-option follow
 complete --command docker --description "Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)" --condition '__fish_seen_subcommand_from logs' --exclusive --long-option since
 complete --command docker --description "Number of lines to show from the end of the logs (default \"all\")" --condition '__fish_seen_subcommand_from logs' --exclusive --short-option n --long-option tail
 complete --command docker --description "Show timestamps" --condition '__fish_seen_subcommand_from logs' --short-option t --long-option timestamps
 complete --command docker --description "Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42" --condition '__fish_seen_subcommand_from logs' --exclusive --long-option until
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from logs' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description Container --condition '__fish_seen_subcommand_from logs' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 
 # pause
-complete --command docker --description "Pause all processes within one or more containers" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'pause'
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from pause' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description "Pause all processes within one or more containers" --condition _halostatue_fish_docker_no_subcommand --arguments pause
+complete --command docker --description Container --condition '__fish_seen_subcommand_from pause' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 
 # port
-complete --command docker --description "List port mappings or a specific mapping for the container" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'port'
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from port' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description "List port mappings or a specific mapping for the container" --condition _halostatue_fish_docker_no_subcommand --arguments port
+complete --command docker --description Container --condition '__fish_seen_subcommand_from port' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 complete --command docker --description "[PRIVATE_PORT[/PROTO]]" --condition '__fish_seen_subcommand_from port' --exclusive
 
 # ps
-complete --command docker --description "List containers" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'ps'
+complete --command docker --description "List containers" --condition _halostatue_fish_docker_no_subcommand --arguments ps
 complete --command docker --description "Show all containers (default shows just running)" --condition '__fish_seen_subcommand_from ps' --short-option a --long-option all
 complete --command docker --description "Filter output based on conditions provided" --condition '__fish_seen_subcommand_from ps' --exclusive --short-option f --long-option filter
 complete --command docker --description "Pretty-print containers using a Go template" --condition '__fish_seen_subcommand_from ps' --exclusive --long-option format
@@ -305,47 +305,47 @@ complete --command docker --description "Only display container IDs" --condition
 complete --command docker --description "Display total file sizes" --condition '__fish_seen_subcommand_from ps' --short-option s --long-option size
 
 # pull
-complete --command docker --description "Pull an image or a repository from a registry" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'pull'
+complete --command docker --description "Pull an image or a repository from a registry" --condition _halostatue_fish_docker_no_subcommand --arguments pull
 complete --command docker --description "Download all tagged images in the repository" --condition '__fish_seen_subcommand_from pull' --short-option a --long-option all-tags
 complete --command docker --description "Skip image verification (default true)" --condition '__fish_seen_subcommand_from pull' --long-option disable-content-trust
 complete --command docker --description "Set platform if server is multi-platform capable" --condition '__fish_seen_subcommand_from pull' --exclusive --long-option platform
 complete --command docker --description "Suppress verbose output" --condition '__fish_seen_subcommand_from pull' --short-option q --long-option quiet
-complete --command docker --description "Repository" --condition '__fish_seen_subcommand_from pull' --arguments '(_halostatue_fish_docker_print_repositories )' --exclusive
-complete --command docker --description "Image" --condition '__fish_seen_subcommand_from pull' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
+complete --command docker --description Repository --condition '__fish_seen_subcommand_from pull' --arguments '(_halostatue_fish_docker_print_repositories )' --exclusive
+complete --command docker --description Image --condition '__fish_seen_subcommand_from pull' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
 
 # push
-complete --command docker --description "Push an image or a repository to a registry" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'push'
+complete --command docker --description "Push an image or a repository to a registry" --condition _halostatue_fish_docker_no_subcommand --arguments push
 complete --command docker --description "Push all tagged images in the repository" --condition '__fish_seen_subcommand_from push' --short-option a --long-option all-tags
 complete --command docker --description "Skip image signing (default true)" --condition '__fish_seen_subcommand_from push' --long-option disable-content-trust
 complete --command docker --description "Suppress verbose output" --condition '__fish_seen_subcommand_from push' --short-option q --long-option quiet
-complete --command docker --description "Repository" --condition '__fish_seen_subcommand_from push' --arguments '(_halostatue_fish_docker_print_repositories )' --exclusive
-complete --command docker --description "Image" --condition '__fish_seen_subcommand_from push' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
+complete --command docker --description Repository --condition '__fish_seen_subcommand_from push' --arguments '(_halostatue_fish_docker_print_repositories )' --exclusive
+complete --command docker --description Image --condition '__fish_seen_subcommand_from push' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
 
 # rename
-complete --command docker --description "Rename a container" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'rename'
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from rename' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
-complete --command docker --description "NEW_NAME" --condition '__fish_seen_subcommand_from rename' --exclusive
+complete --command docker --description "Rename a container" --condition _halostatue_fish_docker_no_subcommand --arguments rename
+complete --command docker --description Container --condition '__fish_seen_subcommand_from rename' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description NEW_NAME --condition '__fish_seen_subcommand_from rename' --exclusive
 
 # restart
-complete --command docker --description "Restart one or more containers" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'restart'
+complete --command docker --description "Restart one or more containers" --condition _halostatue_fish_docker_no_subcommand --arguments restart
 complete --command docker --description "Seconds to wait for stop before killing the container (default 10)" --condition '__fish_seen_subcommand_from restart' --exclusive --short-option t --long-option time
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from restart' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description Container --condition '__fish_seen_subcommand_from restart' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 
 # rm
-complete --command docker --description "Remove one or more containers" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'rm'
+complete --command docker --description "Remove one or more containers" --condition _halostatue_fish_docker_no_subcommand --arguments rm
 complete --command docker --description "Force the removal of a running container (uses SIGKILL)" --condition '__fish_seen_subcommand_from rm' --short-option f --long-option force
 complete --command docker --description "Remove the specified link" --condition '__fish_seen_subcommand_from rm' --short-option l --long-option link
 complete --command docker --description "Remove anonymous volumes associated with the container" --condition '__fish_seen_subcommand_from rm' --short-option v --long-option volumes
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from rm' --arguments '(_halostatue_fish_docker_print_containers stopped)' --exclusive
+complete --command docker --description Container --condition '__fish_seen_subcommand_from rm' --arguments '(_halostatue_fish_docker_print_containers stopped)' --exclusive
 
 # rmi
-complete --command docker --description "Remove one or more images" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'rmi'
+complete --command docker --description "Remove one or more images" --condition _halostatue_fish_docker_no_subcommand --arguments rmi
 complete --command docker --description "Force removal of the image" --condition '__fish_seen_subcommand_from rmi' --short-option f --long-option force
 complete --command docker --description "Do not delete untagged parents" --condition '__fish_seen_subcommand_from rmi' --long-option no-prune
-complete --command docker --description "Image" --condition '__fish_seen_subcommand_from rmi' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
+complete --command docker --description Image --condition '__fish_seen_subcommand_from rmi' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
 
 # run
-complete --command docker --description "Run a command in a new container" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'run'
+complete --command docker --description "Run a command in a new container" --condition _halostatue_fish_docker_no_subcommand --arguments run
 complete --command docker --description "Add a custom host-to-IP mapping (host:ip)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option add-host
 complete --command docker --description "Attach to STDIN, STDOUT or STDERR" --condition '__fish_seen_subcommand_from run' --exclusive --short-option a --long-option attach
 complete --command docker --description "Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option blkio-weight
@@ -444,60 +444,60 @@ complete --command docker --description "Bind mount a volume" --condition '__fis
 complete --command docker --description "Optional volume driver for the container" --condition '__fish_seen_subcommand_from run' --exclusive --long-option volume-driver
 complete --command docker --description "Mount volumes from the specified container(s)" --condition '__fish_seen_subcommand_from run' --exclusive --long-option volumes-from
 complete --command docker --description "Working directory inside the container" --condition '__fish_seen_subcommand_from run' --exclusive --short-option w --long-option workdir
-complete --command docker --description "Image" --condition '__fish_seen_subcommand_from run' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
+complete --command docker --description Image --condition '__fish_seen_subcommand_from run' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
 complete --command docker --description "[COMMAND]" --condition '__fish_seen_subcommand_from run' --exclusive
-complete --command docker --description "ARG" --condition '__fish_seen_subcommand_from run' --exclusive
+complete --command docker --description ARG --condition '__fish_seen_subcommand_from run' --exclusive
 
 # save
-complete --command docker --description "Save one or more images to a tar archive (streamed to STDOUT by default)" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'save'
+complete --command docker --description "Save one or more images to a tar archive (streamed to STDOUT by default)" --condition _halostatue_fish_docker_no_subcommand --arguments save
 complete --command docker --description "Write to a file, instead of STDOUT" --condition '__fish_seen_subcommand_from save' --exclusive --short-option o --long-option output
-complete --command docker --description "Image" --condition '__fish_seen_subcommand_from save' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
+complete --command docker --description Image --condition '__fish_seen_subcommand_from save' --arguments '(_halostatue_fish_docker_print_images )' --exclusive
 
 # search
-complete --command docker --description "Search the Docker Hub for images" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'search'
+complete --command docker --description "Search the Docker Hub for images" --condition _halostatue_fish_docker_no_subcommand --arguments search
 complete --command docker --description "Filter output based on conditions provided" --condition '__fish_seen_subcommand_from search' --exclusive --short-option f --long-option filter
 complete --command docker --description "Pretty-print search using a Go template" --condition '__fish_seen_subcommand_from search' --exclusive --long-option format
 complete --command docker --description "Max number of search results (default 25)" --condition '__fish_seen_subcommand_from search' --exclusive --long-option limit
 complete --command docker --description "Don't truncate output" --condition '__fish_seen_subcommand_from search' --long-option no-trunc
-complete --command docker --description "TERM" --condition '__fish_seen_subcommand_from search' --exclusive
+complete --command docker --description TERM --condition '__fish_seen_subcommand_from search' --exclusive
 
 # start
-complete --command docker --description "Start one or more stopped containers" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'start'
+complete --command docker --description "Start one or more stopped containers" --condition _halostatue_fish_docker_no_subcommand --arguments start
 complete --command docker --description "Attach STDOUT/STDERR and forward signals" --condition '__fish_seen_subcommand_from start' --short-option a --long-option attach
 complete --command docker --description "Override the key sequence for detaching a container" --condition '__fish_seen_subcommand_from start' --exclusive --long-option detach-keys
 complete --command docker --description "Attach container's STDIN" --condition '__fish_seen_subcommand_from start' --short-option i --long-option interactive
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from start' --arguments '(_halostatue_fish_docker_print_containers stopped)' --exclusive
+complete --command docker --description Container --condition '__fish_seen_subcommand_from start' --arguments '(_halostatue_fish_docker_print_containers stopped)' --exclusive
 
 # stats
-complete --command docker --description "Display a live stream of container(s) resource usage statistics" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'stats'
+complete --command docker --description "Display a live stream of container(s) resource usage statistics" --condition _halostatue_fish_docker_no_subcommand --arguments stats
 complete --command docker --description "Show all containers (default shows just running)" --condition '__fish_seen_subcommand_from stats' --short-option a --long-option all
 complete --command docker --description "Pretty-print images using a Go template" --condition '__fish_seen_subcommand_from stats' --exclusive --long-option format
 complete --command docker --description "Disable streaming stats and only pull the first result" --condition '__fish_seen_subcommand_from stats' --long-option no-stream
 complete --command docker --description "Do not truncate output" --condition '__fish_seen_subcommand_from stats' --long-option no-trunc
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from stats' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description Container --condition '__fish_seen_subcommand_from stats' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 
 # stop
-complete --command docker --description "Stop one or more running containers" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'stop'
+complete --command docker --description "Stop one or more running containers" --condition _halostatue_fish_docker_no_subcommand --arguments stop
 complete --command docker --description "Seconds to wait for stop before killing it (default 10)" --condition '__fish_seen_subcommand_from stop' --exclusive --short-option t --long-option time
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from stop' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description Container --condition '__fish_seen_subcommand_from stop' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 
 # tag
-complete --command docker --description "Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'tag'
+complete --command docker --description "Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE" --condition _halostatue_fish_docker_no_subcommand --arguments tag
 complete --command docker --description "SOURCE_IMAGE[:TAG]" --condition '__fish_seen_subcommand_from tag' --exclusive
 complete --command docker --description "TARGET_IMAGE[:TAG]" --condition '__fish_seen_subcommand_from tag' --exclusive
 
 # top
-complete --command docker --description "Display the running processes of a container" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'top'
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from top' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description "Display the running processes of a container" --condition _halostatue_fish_docker_no_subcommand --arguments top
+complete --command docker --description Container --condition '__fish_seen_subcommand_from top' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 complete --command docker --description "[ps" --condition '__fish_seen_subcommand_from top' --exclusive
 complete --command docker --description "OPTIONS]" --condition '__fish_seen_subcommand_from top' --exclusive
 
 # unpause
-complete --command docker --description "Unpause all processes within one or more containers" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'unpause'
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from unpause' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description "Unpause all processes within one or more containers" --condition _halostatue_fish_docker_no_subcommand --arguments unpause
+complete --command docker --description Container --condition '__fish_seen_subcommand_from unpause' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 
 # update
-complete --command docker --description "Update configuration of one or more containers" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'update'
+complete --command docker --description "Update configuration of one or more containers" --condition _halostatue_fish_docker_no_subcommand --arguments update
 complete --command docker --description "Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)" --condition '__fish_seen_subcommand_from update' --exclusive --long-option blkio-weight
 complete --command docker --description "Limit CPU CFS (Completely Fair Scheduler) period" --condition '__fish_seen_subcommand_from update' --exclusive --long-option cpu-period
 complete --command docker --description "Limit CPU CFS (Completely Fair Scheduler) quota" --condition '__fish_seen_subcommand_from update' --exclusive --long-option cpu-quota
@@ -513,81 +513,90 @@ complete --command docker --description "Memory soft limit" --condition '__fish_
 complete --command docker --description "Swap limit equal to memory plus swap: '-1' to enable unlimited swap" --condition '__fish_seen_subcommand_from update' --exclusive --long-option memory-swap
 complete --command docker --description "Tune container pids limit (set -1 for unlimited)" --condition '__fish_seen_subcommand_from update' --exclusive --long-option pids-limit
 complete --command docker --description "Restart policy to apply when a container exits" --condition '__fish_seen_subcommand_from update' --exclusive --long-option restart
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from update' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description Container --condition '__fish_seen_subcommand_from update' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 
 # version
-complete --command docker --description "Show the Docker version information" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'version'
+complete --command docker --description "Show the Docker version information" --condition _halostatue_fish_docker_no_subcommand --arguments version
 complete --command docker --description "Format the output using the given Go template" --condition '__fish_seen_subcommand_from version' --exclusive --short-option f --long-option format
 complete --command docker --description "Kubernetes config file" --condition '__fish_seen_subcommand_from version' --exclusive --long-option kubeconfig
 
 # wait
-complete --command docker --description "Block until one or more containers stop, then print their exit codes" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'wait'
-complete --command docker --description "Container" --condition '__fish_seen_subcommand_from wait' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
+complete --command docker --description "Block until one or more containers stop, then print their exit codes" --condition _halostatue_fish_docker_no_subcommand --arguments wait
+complete --command docker --description Container --condition '__fish_seen_subcommand_from wait' --arguments '(_halostatue_fish_docker_print_containers running)' --exclusive
 
 # builder
-complete --command docker --description "Manage builds" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'builder'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from builder' --exclusive
+complete --command docker --description "Manage builds" --condition _halostatue_fish_docker_no_subcommand --arguments builder
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from builder' --exclusive
+
+# compose
+complete --command docker --description "Docker Compose (Docker Inc., 2.6.0)" --condition _halostatue_fish_docker_no_subcommand --arguments compose
+complete --command docker --description "Control when to print ANSI control characters (\"never\"|\"always\"|\"auto\")" --condition '__fish_seen_subcommand_from compose' --exclusive --long-option ansi
+complete --command docker --description "Run compose in backward compatibility mode" --condition '__fish_seen_subcommand_from compose' --long-option compatibility
+complete --command docker --description "Specify an alternate environment file." --condition '__fish_seen_subcommand_from compose' --exclusive --long-option env-file
+complete --command docker --description "Compose configuration files" --condition '__fish_seen_subcommand_from compose' --exclusive --short-option f --long-option file
+complete --command docker --description "Specify a profile to enable" --condition '__fish_seen_subcommand_from compose' --exclusive --long-option profile
+complete --command docker --description "Specify an alternate working directory" --condition '__fish_seen_subcommand_from compose' --exclusive --long-option project-directory
+complete --command docker --description "Project name" --condition '__fish_seen_subcommand_from compose' --exclusive --short-option p --long-option project-name
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from compose' --exclusive
 
 # config
-complete --command docker --description "Manage Docker configs" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'config'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from config' --exclusive
+complete --command docker --description "Manage Docker configs" --condition _halostatue_fish_docker_no_subcommand --arguments config
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from config' --exclusive
 
 # container
-complete --command docker --description "Manage containers" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'container'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from container' --exclusive
+complete --command docker --description "Manage containers" --condition _halostatue_fish_docker_no_subcommand --arguments container
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from container' --exclusive
 
 # context
-complete --command docker --description "Manage contexts" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'context'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from context' --exclusive
+complete --command docker --description "Manage contexts" --condition _halostatue_fish_docker_no_subcommand --arguments context
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from context' --exclusive
 
 # image
-complete --command docker --description "Manage images" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'image'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from image' --exclusive
+complete --command docker --description "Manage images" --condition _halostatue_fish_docker_no_subcommand --arguments image
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from image' --exclusive
 
 # manifest
-complete --command docker --description "Manage Docker image manifests and manifest lists" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'manifest'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from manifest' --exclusive
+complete --command docker --description "Manage Docker image manifests and manifest lists" --condition _halostatue_fish_docker_no_subcommand --arguments manifest
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from manifest' --exclusive
 
 # network
-complete --command docker --description "Manage networks" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'network'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from network' --exclusive
+complete --command docker --description "Manage networks" --condition _halostatue_fish_docker_no_subcommand --arguments network
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from network' --exclusive
 
 # node
-complete --command docker --description "Manage Swarm nodes" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'node'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from node' --exclusive
+complete --command docker --description "Manage Swarm nodes" --condition _halostatue_fish_docker_no_subcommand --arguments node
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from node' --exclusive
 
 # plugin
-complete --command docker --description "Manage plugins" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'plugin'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from plugin' --exclusive
+complete --command docker --description "Manage plugins" --condition _halostatue_fish_docker_no_subcommand --arguments plugin
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from plugin' --exclusive
 
 # secret
-complete --command docker --description "Manage Docker secrets" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'secret'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from secret' --exclusive
+complete --command docker --description "Manage Docker secrets" --condition _halostatue_fish_docker_no_subcommand --arguments secret
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from secret' --exclusive
 
 # service
-complete --command docker --description "Manage services" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'service'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from service' --exclusive
+complete --command docker --description "Manage services" --condition _halostatue_fish_docker_no_subcommand --arguments service
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from service' --exclusive
 
 # stack
-complete --command docker --description "Manage Docker stacks" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'stack'
+complete --command docker --description "Manage Docker stacks" --condition _halostatue_fish_docker_no_subcommand --arguments stack
 complete --command docker --description "Kubernetes config file" --condition '__fish_seen_subcommand_from stack' --exclusive --long-option kubeconfig
 complete --command docker --description "Orchestrator to use (swarm|kubernetes|all)" --condition '__fish_seen_subcommand_from stack' --exclusive --long-option orchestrator
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from stack' --exclusive
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from stack' --exclusive
 
 # swarm
-complete --command docker --description "Manage Swarm" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'swarm'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from swarm' --exclusive
+complete --command docker --description "Manage Swarm" --condition _halostatue_fish_docker_no_subcommand --arguments swarm
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from swarm' --exclusive
 
 # system
-complete --command docker --description "Manage Docker" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'system'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from system' --exclusive
+complete --command docker --description "Manage Docker" --condition _halostatue_fish_docker_no_subcommand --arguments system
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from system' --exclusive
 
 # trust
-complete --command docker --description "Manage trust on Docker images" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'trust'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from trust' --exclusive
+complete --command docker --description "Manage trust on Docker images" --condition _halostatue_fish_docker_no_subcommand --arguments trust
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from trust' --exclusive
 
 # volume
-complete --command docker --description "Manage volumes" --condition '_halostatue_fish_docker_no_subcommand' --arguments 'volume'
-complete --command docker --description "COMMAND" --condition '__fish_seen_subcommand_from volume' --exclusive
-
-
+complete --command docker --description "Manage volumes" --condition _halostatue_fish_docker_no_subcommand --arguments volume
+complete --command docker --description COMMAND --condition '__fish_seen_subcommand_from volume' --exclusive
