@@ -1,5 +1,13 @@
 # fish-docker Changelog
 
+## 1.10 / 2023-05-12
+
+- Completion regenerated for Docker version 23.0.5, build bc4487a59e and Docker
+  Compose version 2.17.3.
+
+- Tweaked `gen_completions.rb` to include the Docker and Docker Compose versions
+  as part of the completion script output.
+
 ## 1.9 / 2022-06-26
 
 - Completion regenerated for Docker version 20.10.17, build 100c70180f and
