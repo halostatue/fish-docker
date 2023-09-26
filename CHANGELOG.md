@@ -1,5 +1,10 @@
 # fish-docker Changelog
 
+## 1.11 / 2023-09-26
+
+- Completion regenerated for Docker version 24.0.6, build ed223bc820 and Docker
+  Compose version 2.21.0
+
 ## 1.10 / 2023-05-12
 
 - Completion regenerated for Docker version 23.0.5, build bc4487a59e and Docker
