@@ -1,5 +1,10 @@
 # halostatue/fish-docker
 
+> [!IMPORTANT]
+>
+> This plugin will no longer be updated. Prefer using the `docker.fish`
+> vendor completions provided in your `docker` package.
+
 [![Version][]](https://github.com/halostatue/fish-docker/releases)
 
 Completions for [Docker][] in the [fish shell][], based on
